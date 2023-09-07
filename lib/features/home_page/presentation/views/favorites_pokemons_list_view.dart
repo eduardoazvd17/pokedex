@@ -16,7 +16,7 @@ class FavoritesPokemonsListView extends GetWidget<HomePageController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 15, right: 15),
         child: controller.error != null ||
                 controller.isLoading ||
                 controller.favoritesPokemons.isEmpty
@@ -57,8 +57,8 @@ class FavoritesPokemonsListView extends GetWidget<HomePageController> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            'all-pokemons-list-view-header'.i18n(),
-            style: CustomAppThemes.title25w600,
+            'favorites-pokemons-list-view-header'.i18n(),
+            style: CustomAppThemes.headerTextStyle,
           ),
         ),
         const SizedBox(height: 20),

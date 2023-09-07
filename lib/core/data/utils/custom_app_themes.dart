@@ -6,8 +6,18 @@ class CustomAppThemes {
   static Color get backgroundColor => Colors.white;
   static Color get foregroundColor => Colors.black;
 
-  static TextStyle get title25w600 => const TextStyle(
-        fontSize: 25,
+  static TextStyle get bodySmallTextStyle => const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+      );
+
+  static TextStyle get headerSmallTextStyle => const TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.w700,
+      );
+
+  static TextStyle get headerTextStyle => const TextStyle(
+        fontSize: 32,
         fontWeight: FontWeight.w600,
       );
 

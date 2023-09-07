@@ -76,10 +76,16 @@ class PokemonCardWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(pokemonModel.formattedOrder),
               Text(
-                pokemonModel.name,
-                style: CustomAppThemes.title25w600,
+                pokemonModel.formattedOrder,
+                style: CustomAppThemes.bodySmallTextStyle,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Text(
+                  pokemonModel.name,
+                  style: CustomAppThemes.headerSmallTextStyle,
+                ),
               ),
               Wrap(
                 spacing: 5,
