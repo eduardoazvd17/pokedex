@@ -26,7 +26,7 @@ class HomeService extends AppService {
         pokemonModels.add(
           PokemonModel(
             order: order,
-            name: name,
+            name: name.replaceAll(name[0], name[0].toUpperCase()),
             types: types,
             imageUrl: imageUrl,
           ),
