@@ -3,6 +3,10 @@ import 'package:iconoir_flutter/home_alt.dart';
 import 'package:iconoir_flutter/pokeball.dart';
 import 'package:iconoir_flutter/profile_circle.dart';
 import 'package:localization/localization.dart';
+import 'package:pokedex/features/home_page/presentation/views/favorites_pokemons_list_view.dart';
+import 'package:pokedex/features/home_page/presentation/views/profile_view.dart';
+
+import '../../presentation/views/all_pokemons_list_view.dart';
 
 enum HomePageMenu {
   home,
@@ -33,6 +37,14 @@ extension HomePageMenuExtension on HomePageMenu {
       HomePageMenu.profile => ProfileCircle(
           color: isSelected ? Theme.of(context).primaryColor : null,
         ),
+    };
+  }
+
+  Widget get page {
+    return switch (this) {
+      HomePageMenu.home => const AllPokemonsListView(),
+      HomePageMenu.favorites => const FavoritesPokemonsListView(),
+      HomePageMenu.profile => const ProfileView(),
     };
   }
 }

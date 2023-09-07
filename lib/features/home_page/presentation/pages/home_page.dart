@@ -2,9 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/core/presentation/widgets/custom_asset_icon.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
-import 'package:pokedex/features/home_page/presentation/views/all_pokemons_list_view.dart';
-import 'package:pokedex/features/home_page/presentation/views/favorites_pokemons_list_view.dart';
-import 'package:pokedex/features/home_page/presentation/views/my_profile_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,11 +41,7 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: PageView(
                 controller: _pageViewController,
-                children: const [
-                  AllPokemonsListView(),
-                  FavoritesPokemonsListView(),
-                  MyProfileView(),
-                ],
+                children: HomePageMenu.values.map((e) => e.page).toList(),
               ),
             ),
           ],
