@@ -5,7 +5,7 @@ import 'package:pokedex/features/home_page/data/bindings/home_page_binding.dart'
 import 'package:pokedex/features/home_page/presentation/pages/home_page.dart';
 import 'package:get/get.dart';
 
-import 'core/data/utils/app_theme.dart';
+import 'core/data/utils/custom_app_themes.dart';
 
 void main() {
   LocalJsonLocalization.delegate.directories = ['lib/i18n'];
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Pokedex',
-      theme: AppTheme.lightTheme,
+      theme: CustomAppThemes.lightTheme,
       localizationsDelegates: _localizationsDelegates,
       supportedLocales: _supportedLocales,
       localeResolutionCallback: _localeResolutionCallback,

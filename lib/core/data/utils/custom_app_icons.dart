@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pokedex/core/data/utils/app_theme.dart';
+import 'package:pokedex/core/data/utils/custom_app_themes.dart';
 
 class CustomAppIcons {
   static Widget home({bool isSelected = false}) {
@@ -48,7 +48,7 @@ class CustomAppIcons {
   static Widget _svgAsset(String asset,
       {bool isSelected = false, double? size}) {
     final ColorFilter selectedFilter =
-        ColorFilter.mode(AppTheme.primaryColor, BlendMode.srcIn);
+        ColorFilter.mode(CustomAppThemes.primaryColor, BlendMode.srcIn);
 
     return SizedBox(
       height: size ?? 30,

@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_type_tag_widget.dart';
 
-import '../../../../core/data/utils/app_theme.dart';
+import '../../../../core/data/utils/custom_app_themes.dart';
 import '../../../../core/data/utils/custom_app_icons.dart';
 import '../../data/models/pokemon_model.dart';
 
@@ -79,7 +79,7 @@ class PokemonCardWidget extends StatelessWidget {
               Text(pokemonModel.formattedOrder),
               Text(
                 pokemonModel.name,
-                style: AppTheme.title25w600,
+                style: CustomAppThemes.title25w600,
               ),
               Wrap(
                 spacing: 5,

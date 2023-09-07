@@ -4,7 +4,7 @@ import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/presentation/controllers/home_page_controller.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_card_widget.dart';
 
-import '../../../../core/data/utils/app_theme.dart';
+import '../../../../core/data/utils/custom_app_themes.dart';
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 import '../widgets/pokemon_logo_widget.dart';
 
@@ -53,7 +53,7 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'all-pokemons-list-view-header'.i18n(),
-            style: AppTheme.title25w600,
+            style: CustomAppThemes.title25w600,
           ),
         ),
         const SizedBox(height: 20),
