@@ -70,17 +70,13 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        Image.asset(
-          'assets/images/pokemon-logo.png',
-          width: MediaQuery.of(context).size.width * .5,
-        ),
       ],
     );
   }
 
   Widget _bottomNavigationBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20, top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: HomePageMenu.values
@@ -97,7 +93,10 @@ class _HomePageState extends State<HomePage> {
                   });
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 5,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
