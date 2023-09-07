@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokedex/core/presentation/widgets/custom_asset_icon.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 
+import '../../../../core/data/utils/app_icons.dart';
 import '../controllers/home_page_controller.dart';
 
 class HomePage extends GetWidget<HomePageController> {
@@ -37,14 +36,11 @@ class HomePage extends GetWidget<HomePageController> {
           children: [
             IconButton(
               onPressed: () {},
-              icon: const CustomAssetIcon(
-                asset: 'assets/images/configuration-icon.png',
-                size: 23,
-              ),
+              icon: AppIcons.settings(),
             ),
             IconButton(
               onPressed: () {},
-              icon: const Icon(CupertinoIcons.bell),
+              icon: AppIcons.notification(),
             ),
           ],
         ),
@@ -75,7 +71,6 @@ class HomePage extends GetWidget<HomePageController> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 16.0),
                           child: item.icon(
-                            context: context,
                             isSelected: item == controller.currentPage,
                           ),
                         ),

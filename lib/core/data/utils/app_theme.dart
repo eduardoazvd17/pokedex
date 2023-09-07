@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static Color get primaryColor => Colors.red;
   static Color get backgroundColor => Colors.white;
+  static Color get foregroundColor => Colors.black;
 
   static TextStyle get title25w600 => const TextStyle(
         fontSize: 25,

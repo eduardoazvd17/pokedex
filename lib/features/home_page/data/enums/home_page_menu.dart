@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:iconoir_flutter/home_alt.dart';
-import 'package:iconoir_flutter/pokeball.dart';
-import 'package:iconoir_flutter/profile_circle.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/presentation/views/favorites_pokemons_list_view.dart';
 import 'package:pokedex/features/home_page/presentation/views/profile_view.dart';
 
+import '../../../../core/data/utils/app_icons.dart';
 import '../../presentation/views/all_pokemons_list_view.dart';
 
 enum HomePageMenu {
@@ -23,20 +21,11 @@ extension HomePageMenuExtension on HomePageMenu {
     };
   }
 
-  Widget icon({
-    required BuildContext context,
-    required bool isSelected,
-  }) {
+  Widget icon({required bool isSelected}) {
     return switch (this) {
-      HomePageMenu.home => HomeAlt(
-          color: isSelected ? Theme.of(context).primaryColor : null,
-        ),
-      HomePageMenu.favorites => Pokeball(
-          color: isSelected ? Theme.of(context).primaryColor : null,
-        ),
-      HomePageMenu.profile => ProfileCircle(
-          color: isSelected ? Theme.of(context).primaryColor : null,
-        ),
+      HomePageMenu.home => AppIcons.home(isSelected: isSelected),
+      HomePageMenu.favorites => AppIcons.favorites(isSelected: isSelected),
+      HomePageMenu.profile => AppIcons.profile(isSelected: isSelected),
     };
   }
 
