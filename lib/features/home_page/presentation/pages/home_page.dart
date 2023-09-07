@@ -1,35 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pokedex/core/presentation/widgets/custom_asset_icon.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 
-class HomePage extends StatefulWidget {
+import '../controllers/home_page_controller.dart';
+
+class HomePage extends GetWidget<HomePageController> {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  HomePageMenu _currentPage = HomePageMenu.home;
-  final _pageViewController = PageController();
-
-  @override
-  void initState() {
-    _pageViewController.addListener(() {
-      setState(() {
-        _currentPage =
-            HomePageMenu.values[_pageViewController.page?.round() ?? 0];
-      });
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _pageViewController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +18,7 @@ class _HomePageState extends State<HomePage> {
             _headerWidget,
             Expanded(
               child: PageView(
-                controller: _pageViewController,
+                controller: controller.pageController,
                 children: HomePageMenu.values.map((e) => e.page).toList(),
               ),
             ),
@@ -75,52 +53,47 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _bottomNavigationBar(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20, top: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: HomePageMenu.values
-            .map(
-              (item) => InkWell(
-                borderRadius: BorderRadius.circular(15),
-                onTap: () {
-                  setState(() {
-                    _pageViewController.animateToPage(
-                      HomePageMenu.values.indexOf(item),
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.ease,
-                    );
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 5,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: item.icon(
-                          context: context,
-                          isSelected: item == _currentPage,
+    return Obx(
+      () => Padding(
+        padding:
+            const EdgeInsets.only(left: 16, right: 16, bottom: 20, top: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: HomePageMenu.values
+              .map(
+                (item) => InkWell(
+                  borderRadius: BorderRadius.circular(15),
+                  onTap: () => controller.changePage(item),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 5,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: item.icon(
+                            context: context,
+                            isSelected: item == controller.currentPage,
+                          ),
                         ),
-                      ),
-                      Text(
-                        item.label,
-                        style: TextStyle(
-                          color: item == _currentPage
-                              ? Theme.of(context).primaryColor
-                              : null,
+                        Text(
+                          item.label,
+                          style: TextStyle(
+                            color: item == controller.currentPage
+                                ? Theme.of(context).primaryColor
+                                : null,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-            .toList(),
+              )
+              .toList(),
+        ),
       ),
     );
   }

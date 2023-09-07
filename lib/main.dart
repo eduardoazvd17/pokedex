@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
+import 'package:pokedex/features/home_page/data/bindings/home_page_binding.dart';
 import 'package:pokedex/features/home_page/presentation/pages/home_page.dart';
+import 'package:get/get.dart';
 
 import 'core/data/utils/app_theme.dart';
 
@@ -14,13 +16,19 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Pokedex',
       theme: AppTheme.lightTheme,
       localizationsDelegates: _localizationsDelegates,
       supportedLocales: _supportedLocales,
       localeResolutionCallback: _localeResolutionCallback,
-      home: const HomePage(),
+      getPages: [
+        GetPage(
+          name: '/',
+          page: () => const HomePage(),
+          binding: HomePageBinding(),
+        ),
+      ],
     );
   }
 
