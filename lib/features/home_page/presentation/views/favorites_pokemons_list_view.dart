@@ -14,7 +14,7 @@ class FavoritesPokemonsListView extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width / 5,
+              horizontal: MediaQuery.of(context).size.width / 4,
             ),
             child: Image.asset('assets/images/pokemon-logo.png'),
           ),

@@ -5,6 +5,18 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20),
+      child: ListView(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width / 4,
+            ),
+            child: Image.asset('assets/images/pokemon-logo.png'),
+          ),
+        ],
+      ),
+    );
   }
 }
