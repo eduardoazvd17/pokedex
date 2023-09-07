@@ -1,3 +1,4 @@
 {
+    "connection-error": "Não foi possível se comunicar com o servidor, verifique sua conexão.",
     "get-all-pokemons-error": "Não foi possível obter os dados dos pokemons."
 }

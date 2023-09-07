@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:localization/localization.dart';
+import 'package:pokedex/core/data/exceptions/app_exception.dart';
 
 class AppService {
   Future<Map<String, dynamic>> get({
@@ -12,10 +14,13 @@ class AppService {
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
-        throw Exception('');
+        throw Exception('${response.statusCode} - ${response.body}');
       }
-    } catch (_) {
-      rethrow;
+    } catch (error) {
+      throw AppException(
+        'connection-error'.i18n(),
+        detailedMessage: error.toString(),
+      );
     }
   }
 }

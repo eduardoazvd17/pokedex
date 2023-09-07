@@ -13,8 +13,13 @@ class HomeService extends AppService {
       return List<Map<String, dynamic>>.from(response['results'])
           .map((map) => PokemonModel.fromMap(map))
           .toList();
-    } catch (_) {
-      throw AppException('get-all-pokemons-error'.i18n());
+    } on AppException catch (_) {
+      rethrow;
+    } catch (error) {
+      throw AppException(
+        'get-all-pokemons-error'.i18n(),
+        detailedMessage: error.toString(),
+      );
     }
   }
 }

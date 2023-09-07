@@ -1,4 +1,5 @@
 class AppException implements Exception {
   final String message;
-  AppException(this.message);
+  final String? detailedMessage;
+  AppException(this.message, {this.detailedMessage});
 }
