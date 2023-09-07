@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/core/data/exceptions/app_exception.dart';
 
@@ -21,7 +22,7 @@ class AppErrorWidget extends StatelessWidget {
           const Icon(
             CupertinoIcons.exclamationmark_triangle,
             size: 32,
-          ),
+          ).animate().fade().slideY(),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
