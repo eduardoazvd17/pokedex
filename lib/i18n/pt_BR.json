@@ -6,5 +6,7 @@
     "profile-label": "Perfil",
     "all-pokemons-list-view-header": "Qual Pokémon você está procurando?",
     "favorites-pokemons-list-view-header": "Meus Pokémons favoritos",
-    "try-again": "Tentar novamente"
+    "try-again": "Tentar novamente",
+    "loading": "Carregando...",
+    "empty-favorites": "Você ainda não favoritou nenhum Pokémon."
 }

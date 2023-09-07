@@ -4,6 +4,7 @@ import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/presentation/controllers/home_page_controller.dart';
 
 import '../../../../core/data/utils/app_theme.dart';
+import '../../../../core/presentation/widgets/app_info_widget.dart';
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 import '../widgets/pokemon_card_widget.dart';
 
@@ -33,7 +34,7 @@ class FavoritesPokemonsListView extends GetWidget<HomePageController> {
             if (controller.error != null)
               Padding(
                 padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height / 5,
+                  top: MediaQuery.of(context).size.height / 7,
                 ),
                 child: controller.error!,
               )
@@ -43,6 +44,13 @@ class FavoritesPokemonsListView extends GetWidget<HomePageController> {
                   top: MediaQuery.of(context).size.height / 5,
                 ),
                 child: const AppLoadingWidget(),
+              )
+            else if (controller.favoritesPokemons.isEmpty)
+              Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 6,
+                ),
+                child: AppInfoWidget(message: 'empty-favorites'.i18n()),
               )
             else
               ...controller.favoritesPokemons.map(

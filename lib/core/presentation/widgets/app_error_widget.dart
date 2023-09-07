@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/core/data/exceptions/app_exception.dart';
@@ -17,13 +18,21 @@ class AppErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            exception.message,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          const Icon(
+            CupertinoIcons.exclamationmark_triangle,
+            size: 32,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              exception.message,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18),
+            ),
           ),
           if (tryAgain != null)
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextButton(
                 onPressed: () {
                   tryAgain?.call();
