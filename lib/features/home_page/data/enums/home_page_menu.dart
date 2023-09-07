@@ -3,7 +3,7 @@ import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/presentation/views/favorites_pokemons_list_view.dart';
 import 'package:pokedex/features/home_page/presentation/views/profile_view.dart';
 
-import '../../../../core/data/utils/app_icons.dart';
+import '../../../../core/data/utils/custom_app_icons.dart';
 import '../../presentation/views/all_pokemons_list_view.dart';
 
 enum HomePageMenu {
@@ -23,9 +23,10 @@ extension HomePageMenuExtension on HomePageMenu {
 
   Widget icon({required bool isSelected}) {
     return switch (this) {
-      HomePageMenu.home => AppIcons.home(isSelected: isSelected),
-      HomePageMenu.favorites => AppIcons.favorites(isSelected: isSelected),
-      HomePageMenu.profile => AppIcons.profile(isSelected: isSelected),
+      HomePageMenu.home => CustomAppIcons.home(isSelected: isSelected),
+      HomePageMenu.favorites =>
+        CustomAppIcons.favorites(isSelected: isSelected),
+      HomePageMenu.profile => CustomAppIcons.profile(isSelected: isSelected),
     };
   }
 

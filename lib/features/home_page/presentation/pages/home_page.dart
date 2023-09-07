@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 
-import '../../../../core/data/utils/app_icons.dart';
+import '../../../../core/data/utils/custom_app_icons.dart';
 import '../controllers/home_page_controller.dart';
 
 class HomePage extends GetWidget<HomePageController> {
@@ -36,11 +36,11 @@ class HomePage extends GetWidget<HomePageController> {
           children: [
             IconButton(
               onPressed: () {},
-              icon: AppIcons.settings(),
+              icon: CustomAppIcons.settings(),
             ),
             IconButton(
               onPressed: () {},
-              icon: AppIcons.notification(),
+              icon: CustomAppIcons.notification(),
             ),
           ],
         ),

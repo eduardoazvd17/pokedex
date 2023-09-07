@@ -32,7 +32,7 @@ extension PokemonTypeExtension on PokemonType {
 
   String get title => name.replaceFirst(name[0], name[0].toUpperCase());
 
-  Widget get icon => const Icon(Icons.ac_unit, size: 18, color: Colors.white);
+  Widget get icon => const Icon(Icons.ac_unit, size: 15, color: Colors.white);
 
   Color get color => switch (this) {
         PokemonType.normal => const Color(0xff7D3600),

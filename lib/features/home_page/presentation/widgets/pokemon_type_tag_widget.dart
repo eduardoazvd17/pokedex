@@ -14,15 +14,18 @@ class PokemonTypeTagWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 2.5, horizontal: 5.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             pokemonType.icon,
-            const SizedBox(width: 5),
+            const SizedBox(width: 2.5),
             Text(
               pokemonType.title,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 11,
+              ),
             ),
           ],
         ),
