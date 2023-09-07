@@ -43,7 +43,7 @@ dependencies:
   localization: ^2.1.0
   flutter_localizations:
     sdk: flutter
-  iconoir_flutter: ^6.11.0
+  flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +72,7 @@ flutter:
   assets:
     - lib/i18n/
     - assets/images/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
