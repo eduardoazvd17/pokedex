@@ -1,23 +1,17 @@
+import '../enums/pokemon_type.dart';
+
 class PokemonModel {
+  final int order;
   final String name;
-  final String url;
+  final List<PokemonType> types;
+  final String imageUrl;
 
   PokemonModel({
-    required this.url,
+    required this.order,
     required this.name,
+    required this.types,
+    required this.imageUrl,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'url': url,
-      'name': name,
-    };
-  }
-
-  factory PokemonModel.fromMap(Map<String, dynamic> map) {
-    return PokemonModel(
-      name: map['name'],
-      url: map['url'],
-    );
-  }
+  String get formattedOrder => '#${order.toString().padLeft(3, '0')}';
 }

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_type_tag_widget.dart';
 
 import '../../../../core/data/utils/app_theme.dart';
+import '../../data/models/pokemon_model.dart';
 
 class PokemonCardWidget extends StatelessWidget {
-  const PokemonCardWidget({super.key});
+  final PokemonModel pokemonModel;
+  const PokemonCardWidget({super.key, required this.pokemonModel});
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +40,11 @@ class PokemonCardWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('#007'),
+                Text(pokemonModel.formattedOrder),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Text(
-                    'Squirtle',
+                    pokemonModel.name,
                     style: AppTheme.title25w600,
                   ),
                 ),
@@ -60,20 +62,20 @@ class PokemonCardWidget extends StatelessWidget {
   }
 
   Widget get _pokemonTypeTagsWidgets {
-    return const Wrap(
+    return Wrap(
       spacing: 5,
       runSpacing: 5,
-      children: [
-        PokemonTypeTagWidget(),
-      ],
+      children: pokemonModel.types
+          .map((e) => PokemonTypeTagWidget(pokemonType: e))
+          .toList(),
     );
   }
 
   Widget get _pokemonImageWidget {
-    return Container(
+    return Image.network(
+      pokemonModel.imageUrl,
       height: 150,
       width: 120,
-      color: Colors.grey,
     );
   }
 

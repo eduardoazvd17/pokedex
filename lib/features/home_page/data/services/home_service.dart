@@ -1,6 +1,7 @@
 import 'package:localization/localization.dart';
 import 'package:pokedex/core/data/exceptions/app_exception.dart';
 import 'package:pokedex/core/data/services/app_service.dart';
+import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
 import 'package:pokedex/features/home_page/data/models/pokemon_model.dart';
 
 class HomeService extends AppService {
@@ -8,11 +9,30 @@ class HomeService extends AppService {
 
   Future<List<PokemonModel>> getAllPokemons() async {
     try {
-      const String url = '$_endpoint/pokemon/?limit=-1';
+      final List<PokemonModel> pokemonModels = [];
+      const String url = '$_endpoint/pokemon/?limit=20';
       final Map<String, dynamic> response = await get(url: url);
-      return List<Map<String, dynamic>>.from(response['results'])
-          .map((map) => PokemonModel.fromMap(map))
-          .toList();
+      final pokemonMap = List<Map<String, dynamic>>.from(response['results']);
+      for (final Map<String, dynamic> pokemon in pokemonMap) {
+        final dataResponse = await get(url: pokemon['url']);
+        final String name = dataResponse['name'];
+        final int order = dataResponse['order'];
+        final String imageUrl =
+            dataResponse['sprites']['other']['home']['front_default'];
+        final List<PokemonType> types = (dataResponse['types'] as List)
+            .map((e) => PokemonTypeExtension.fromName(e['type']['name']))
+            .toList();
+
+        pokemonModels.add(
+          PokemonModel(
+            order: order,
+            name: name,
+            types: types,
+            imageUrl: imageUrl,
+          ),
+        );
+      }
+      return pokemonModels;
     } on AppException catch (_) {
       rethrow;
     } catch (error) {
