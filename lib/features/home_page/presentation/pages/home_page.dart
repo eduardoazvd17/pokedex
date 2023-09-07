@@ -4,6 +4,7 @@ import 'package:pokedex/core/data/utils/custom_app_themes.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 
 import '../../../../core/data/utils/custom_app_icons.dart';
+import '../../../../core/presentation/widgets/custom_bottom_navigation_bar.dart';
 import '../controllers/home_page_controller.dart';
 
 class HomePage extends GetWidget<HomePageController> {
@@ -53,49 +54,23 @@ class HomePage extends GetWidget<HomePageController> {
   }
 
   Widget _bottomNavigationBar(BuildContext context) {
-    return Obx(
-      () => Padding(
-        padding: const EdgeInsets.only(
-          left: 16,
-          right: 16,
-          bottom: 20,
-          top: 10,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: HomePageMenu.values
-              .map(
-                (item) => InkWell(
-                  borderRadius: BorderRadius.circular(15),
-                  onTap: () => controller.changePage(item),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 5,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: item.icon(
-                            isSelected: item == controller.currentPage,
-                          ),
-                        ),
-                        Text(
-                          item.label,
-                          style: item == controller.currentPage
-                              ? CustomAppThemes.menuSelectedTextStyle
-                              : CustomAppThemes.menuNormalTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
-        ),
-      ),
-    );
+    return Obx(() {
+      return CustomBottomNavigationBar(
+        onChange: controller.changePage,
+        items: HomePageMenu.values.map((item) {
+          final bool isSelected = controller.currentPage == item;
+          return CustomBottomNavigationItem(
+            value: item,
+            icon: item.icon(isSelected: isSelected),
+            label: Text(
+              item.label,
+              style: isSelected
+                  ? CustomAppThemes.menuSelectedTextStyle
+                  : CustomAppThemes.menuNormalTextStyle,
+            ),
+          );
+        }).toList(),
+      );
+    });
   }
 }
