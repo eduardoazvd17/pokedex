@@ -6,6 +6,7 @@ import 'package:pokedex/features/home_page/presentation/widgets/pokemon_card_wid
 
 import '../../../../core/data/utils/app_theme.dart';
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
+import '../widgets/pokemon_logo_widget.dart';
 
 class AllPokemonsListView extends GetWidget<HomePageController> {
   const AllPokemonsListView({super.key});
@@ -15,49 +16,63 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
     return Obx(
       () => Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
-        child: ListView(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width / 4,
-              ),
-              child: Image.asset(
-                'assets/images/pokemon-logo.png',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'all-pokemons-list-view-header'.i18n(),
-                style: AppTheme.title25w600,
-              ),
-            ),
-            if (controller.error != null)
-              Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height / 5,
-                ),
-                child: controller.error!,
+        child: controller.error != null ||
+                controller.isLoading ||
+                controller.allPokemons.isEmpty
+            ? Column(
+                children: [
+                  _headerWidget,
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        controller.error ?? const AppLoadingWidget(),
+                      ],
+                    ),
+                  ),
+                ],
               )
-            else if (controller.isLoading)
-              Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height / 5,
-                ),
-                child: const AppLoadingWidget(),
-              )
-            else
-              ...controller.allPokemons.map(
-                (pokemonModel) => PokemonCardWidget(
-                  pokemonModel: pokemonModel,
-                  isFavorite:
-                      controller.favoritesOrder.contains(pokemonModel.order),
-                  toggleFavorite: controller.toggleFavorite,
-                ),
+            : ListView(
+                children: [
+                  _headerWidget,
+                  _pokemonsListWidget,
+                ],
               ),
-          ],
-        ),
       ),
+    );
+  }
+
+  Widget get _headerWidget {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const PokemonLogoWidget(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            'all-pokemons-list-view-header'.i18n(),
+            style: AppTheme.title25w600,
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget get _pokemonsListWidget {
+    return Column(
+      children: controller.allPokemons
+          .map(
+            (pokemonModel) => PokemonCardWidget(
+              pokemonModel: pokemonModel,
+              isFavorite:
+                  controller.favoritesOrder.contains(pokemonModel.order),
+              toggleFavorite: controller.toggleFavorite,
+            ),
+          )
+          .toList(),
     );
   }
 }

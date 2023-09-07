@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/pokemon_logo_widget.dart';
+
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
@@ -9,11 +11,14 @@ class ProfileView extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: ListView(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width / 4,
+          const PokemonLogoWidget(),
+          Container(
+            height: 124,
+            width: 124,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(),
             ),
-            child: Image.asset('assets/images/pokemon-logo.png'),
           ),
         ],
       ),
