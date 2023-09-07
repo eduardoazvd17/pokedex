@@ -5,6 +5,7 @@ import 'package:pokedex/features/home_page/presentation/controllers/home_page_co
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_card_widget.dart';
 
 import '../../../../core/data/utils/app_theme.dart';
+import '../../../../core/presentation/widgets/app_loading_widget.dart';
 
 class AllPokemonsListView extends GetWidget<HomePageController> {
   const AllPokemonsListView({super.key});
@@ -31,16 +32,28 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
                 style: AppTheme.title25w600,
               ),
             ),
-            if (controller.isLoading)
+            if (controller.error != null)
               Padding(
                 padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height / 5,
                 ),
-                child: const Center(child: CircularProgressIndicator()),
+                child: controller.error!,
+              )
+            else if (controller.isLoading)
+              Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 5,
+                ),
+                child: const AppLoadingWidget(),
               )
             else
               ...controller.allPokemons.map(
-                (pokemonModel) => PokemonCardWidget(pokemonModel: pokemonModel),
+                (pokemonModel) => PokemonCardWidget(
+                  pokemonModel: pokemonModel,
+                  isFavorite:
+                      controller.favoritesOrder.contains(pokemonModel.order),
+                  toggleFavorite: controller.toggleFavorite,
+                ),
               ),
           ],
         ),

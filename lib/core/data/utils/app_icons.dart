@@ -45,15 +45,12 @@ class AppIcons {
   }
 
   static Widget _svgAsset(String asset, {bool isSelected = false}) {
-    final ColorFilter normalFilter =
-        ColorFilter.mode(AppTheme.foregroundColor, BlendMode.srcIn);
-
     final ColorFilter selectedFilter =
         ColorFilter.mode(AppTheme.primaryColor, BlendMode.srcIn);
 
     return SvgPicture.asset(
       asset,
-      colorFilter: isSelected ? selectedFilter : normalFilter,
+      colorFilter: isSelected ? selectedFilter : null,
       height: 30,
       width: 30,
     );

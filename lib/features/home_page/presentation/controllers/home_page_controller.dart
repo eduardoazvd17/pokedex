@@ -4,6 +4,7 @@ import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 import 'package:pokedex/features/home_page/data/services/home_service.dart';
 
 import '../../../../core/data/exceptions/app_exception.dart';
+import '../../../../core/presentation/widgets/app_error_widget.dart';
 import '../../data/models/pokemon_model.dart';
 
 class HomePageController extends GetxController {
@@ -16,26 +17,41 @@ class HomePageController extends GetxController {
       _currentPage.value =
           HomePageMenu.values[_pageController.page?.round() ?? 0];
     });
-    _loadAllPokemons();
+    loadAllPokemons();
     super.onInit();
   }
 
   final RxBool _isLoading = RxBool(false);
   bool get isLoading => _isLoading.value;
 
-  final Rx<AppException?> _error = Rx<AppException?>(null);
-  AppException? get error => _error.value;
+  final Rx<AppErrorWidget?> _error = Rx<AppErrorWidget?>(null);
+  AppErrorWidget? get error => _error.value;
   void _clearError() => _error.value = null;
+
+  final RxSet<int> _favorites = RxSet<int>({});
+  RxSet<int> get favoritesOrder => _favorites;
+  List<PokemonModel> get favoritesPokemons =>
+      _allPokemons.where((e) => favoritesOrder.contains(e.order)).toList();
+  void toggleFavorite(int order) {
+    if (favoritesOrder.contains(order)) {
+      favoritesOrder.remove(order);
+    } else {
+      favoritesOrder.add(order);
+    }
+  }
 
   final RxList<PokemonModel> _allPokemons = RxList<PokemonModel>.empty();
   RxList<PokemonModel> get allPokemons => _allPokemons;
-  Future<void> _loadAllPokemons() async {
+  Future<void> loadAllPokemons() async {
     _isLoading.value = true;
     try {
       _clearError();
       allPokemons.assignAll(await _service.getAllPokemons());
-    } on AppException catch (error) {
-      _error.value = error;
+    } on AppException catch (exception) {
+      _error.value = AppErrorWidget(
+        exception: exception,
+        tryAgain: loadAllPokemons,
+      );
     }
     _isLoading.value = false;
   }

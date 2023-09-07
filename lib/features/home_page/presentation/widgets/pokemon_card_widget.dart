@@ -9,7 +9,14 @@ import '../../data/models/pokemon_model.dart';
 
 class PokemonCardWidget extends StatelessWidget {
   final PokemonModel pokemonModel;
-  const PokemonCardWidget({super.key, required this.pokemonModel});
+  final bool isFavorite;
+  final void Function(int) toggleFavorite;
+  const PokemonCardWidget({
+    super.key,
+    required this.pokemonModel,
+    required this.isFavorite,
+    required this.toggleFavorite,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -99,8 +106,8 @@ class PokemonCardWidget extends StatelessWidget {
 
   Widget get _favoriteButton {
     return IconButton(
-      onPressed: () {},
-      icon: AppIcons.heart(isSelected: false),
+      onPressed: () => toggleFavorite.call(pokemonModel.order),
+      icon: AppIcons.heart(isSelected: isFavorite),
     );
   }
 }
