@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_type_tag_widget.dart';
 
-import '../../../../core/data/utils/app_icons.dart';
 import '../../../../core/data/utils/app_theme.dart';
+import '../../../../core/data/utils/custom_app_icons.dart';
 import '../../data/models/pokemon_model.dart';
 
 class PokemonCardWidget extends StatelessWidget {
@@ -24,82 +24,95 @@ class PokemonCardWidget extends StatelessWidget {
       padding: const EdgeInsets.all(2.5),
       child: Stack(
         children: [
-          Card(
-            elevation: 1,
-            color: pokemonModel.types.first.backgroundColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
+          SizedBox(
+            height: 132,
+            child: Card(
+              elevation: 1,
+              color: pokemonModel.types.first.backgroundColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      width: double.maxFinite,
+                      color: pokemonModel.types.first.backgroundColor,
+                    ),
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    bottom: -10,
+                    child: _pokeballOverlayImage,
+                  ),
+                ],
+              ),
             ),
-            child: _content,
           ),
-          Positioned(top: 10, right: 10, child: _favoriteButton),
+          Positioned(
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: _pokemonContentWidget,
+          ),
+          Positioned(top: 16, right: 16, child: _favoriteButton),
         ],
       ),
     );
   }
 
-  Widget get _content {
-    return Stack(
+  Widget get _pokemonContentWidget {
+    return Row(
       children: [
-        Positioned(right: 0, top: 0, bottom: 0, child: _pokeballOverlayImage),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16, bottom: 16, top: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(pokemonModel.formattedOrder),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        pokemonModel.name,
-                        style: AppTheme.title25w600,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: _pokemonTypeTagsWidgets,
-                    ),
-                  ],
-                ),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 20.0,
+            top: 20,
+            bottom: 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(pokemonModel.formattedOrder),
+              Text(
+                pokemonModel.name,
+                style: AppTheme.title25w600,
               ),
-            ),
-            _pokemonImageWidget,
-          ],
+              Wrap(
+                spacing: 5,
+                runSpacing: 5,
+                children: pokemonModel.types
+                    .map((e) => PokemonTypeTagWidget(pokemonType: e))
+                    .toList(),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 5.0),
+          child: _pokemonImageWidget,
         ),
       ],
-    );
-  }
-
-  Widget get _pokemonTypeTagsWidgets {
-    return Wrap(
-      spacing: 5,
-      runSpacing: 5,
-      children: pokemonModel.types
-          .map((e) => PokemonTypeTagWidget(pokemonType: e))
-          .toList(),
     );
   }
 
   Widget get _pokemonImageWidget {
     return Image.network(
       pokemonModel.imageUrl,
-      height: 150,
+      height: 132,
     );
   }
 
   Widget get _pokeballOverlayImage {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0),
-      child: SvgPicture.asset(
-        'assets/images/pokeball-overlay.svg',
-        colorFilter: const ColorFilter.mode(
-          Colors.black38,
-          BlendMode.srcIn,
-        ),
+    return SvgPicture.asset(
+      'assets/images/pokeball-overlay.svg',
+      fit: BoxFit.fitHeight,
+      colorFilter: const ColorFilter.mode(
+        Colors.black38,
+        BlendMode.srcIn,
       ),
     );
   }
@@ -107,7 +120,7 @@ class PokemonCardWidget extends StatelessWidget {
   Widget get _favoriteButton {
     return IconButton(
       onPressed: () => toggleFavorite.call(pokemonModel.order),
-      icon: AppIcons.heart(isSelected: isFavorite),
+      icon: CustomAppIcons.heart(isSelected: isFavorite, size: 35),
     );
   }
 }

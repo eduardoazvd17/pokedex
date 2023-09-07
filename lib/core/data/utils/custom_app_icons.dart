@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pokedex/core/data/utils/app_theme.dart';
 
-class AppIcons {
+class CustomAppIcons {
   static Widget home({bool isSelected = false}) {
     return _svgAsset(
       'assets/icons/home-icon.svg',
@@ -38,21 +38,27 @@ class AppIcons {
     );
   }
 
-  static Widget heart({bool isSelected = false}) {
+  static Widget heart({bool isSelected = false, double? size}) {
     return _svgAsset(
       isSelected ? 'assets/icons/heart-fill.svg' : 'assets/icons/heart.svg',
+      size: size,
     );
   }
 
-  static Widget _svgAsset(String asset, {bool isSelected = false}) {
+  static Widget _svgAsset(String asset,
+      {bool isSelected = false, double? size}) {
     final ColorFilter selectedFilter =
         ColorFilter.mode(AppTheme.primaryColor, BlendMode.srcIn);
 
-    return SvgPicture.asset(
-      asset,
-      colorFilter: isSelected ? selectedFilter : null,
-      height: 30,
-      width: 30,
+    return SizedBox(
+      height: size ?? 30,
+      width: size ?? 30,
+      child: FittedBox(
+        child: SvgPicture.asset(
+          asset,
+          colorFilter: isSelected ? selectedFilter : null,
+        ),
+      ),
     );
   }
 }
