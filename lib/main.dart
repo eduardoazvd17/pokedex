@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
+import 'package:pokedex/features/home_page/presentation/pages/home_page.dart';
 
 void main() {
   LocalJsonLocalization.delegate.directories = ['lib/i18n'];
@@ -14,13 +15,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pokedex',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
       localizationsDelegates: _localizationsDelegates,
       supportedLocales: _supportedLocales,
       localeResolutionCallback: _localeResolutionCallback,
-      home: const Scaffold(),
+      home: const HomePage(),
     );
   }
 
