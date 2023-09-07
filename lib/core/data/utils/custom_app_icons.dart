@@ -4,9 +4,23 @@ import 'package:pokedex/core/data/utils/custom_app_themes.dart';
 
 class CustomAppIcons {
   static Widget home({bool isSelected = false}) {
-    return _svgAsset(
-      'assets/icons/home-icon.svg',
-      isSelected: isSelected,
+    return Stack(
+      children: [
+        _svgAsset(
+          'assets/icons/home-icon.svg',
+          isSelected: isSelected,
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: _svgAsset(
+            'assets/icons/home-icon-overlay.svg',
+            isSelected: isSelected,
+            size: 9,
+          ),
+        ),
+      ],
     );
   }
 
@@ -51,8 +65,8 @@ class CustomAppIcons {
         ColorFilter.mode(CustomAppThemes.primaryColor, BlendMode.srcIn);
 
     return SizedBox(
-      height: size ?? 30,
-      width: size ?? 30,
+      height: size ?? 24,
+      width: size ?? 24,
       child: FittedBox(
         child: SvgPicture.asset(
           asset,
