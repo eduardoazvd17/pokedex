@@ -31,18 +31,21 @@ class HomePage extends GetWidget<HomePageController> {
   Widget get _headerWidget {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: CustomAppIcons.settings(),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: CustomAppIcons.notification(),
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: CustomAppIcons.settings(),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: CustomAppIcons.notification(),
+              ),
+            ],
+          ),
         ),
       ],
     );
