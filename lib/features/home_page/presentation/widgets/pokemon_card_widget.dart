@@ -75,7 +75,6 @@ class PokemonCardWidget extends StatelessWidget {
     return Image.network(
       pokemonModel.imageUrl,
       height: 150,
-      width: 120,
     );
   }
 
