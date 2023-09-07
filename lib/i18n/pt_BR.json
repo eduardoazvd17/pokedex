@@ -3,5 +3,7 @@
     "get-all-pokemons-error": "Não foi possível obter os dados dos pokemons.",
     "home-label": "Início",
     "favorites-label": "Favoritos",
-    "profile-label": "Perfil"
+    "profile-label": "Perfil",
+    "all-pokemons-list-view-header": "Qual Pokémon você está procurando?",
+    "favorites-pokemons-list-view-header": "Meus Pokémons favoritos"
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/presentation/pages/home_page.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Pokedex',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        fontFamily: GoogleFonts.roboto().fontFamily,
         useMaterial3: true,
       ),
       localizationsDelegates: _localizationsDelegates,
