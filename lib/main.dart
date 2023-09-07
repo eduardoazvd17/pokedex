@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/presentation/pages/home_page.dart';
+
+import 'core/data/utils/app_theme.dart';
 
 void main() {
   LocalJsonLocalization.delegate.directories = ['lib/i18n'];
@@ -15,11 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pokedex',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        fontFamily: GoogleFonts.roboto().fontFamily,
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
       localizationsDelegates: _localizationsDelegates,
       supportedLocales: _supportedLocales,
       localeResolutionCallback: _localeResolutionCallback,
