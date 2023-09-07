@@ -6,6 +6,17 @@ class CustomAppThemes {
   static Color get backgroundColor => Colors.white;
   static Color get foregroundColor => Colors.black;
 
+  static TextStyle get menuNormalTextStyle => const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+      );
+
+  static TextStyle get menuSelectedTextStyle => TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w800,
+        color: primaryColor,
+      );
+
   static TextStyle get bodySmallTextStyle => const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,

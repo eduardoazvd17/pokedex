@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokedex/core/data/utils/custom_app_themes.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 
 import '../../../../core/data/utils/custom_app_icons.dart';
@@ -54,8 +55,12 @@ class HomePage extends GetWidget<HomePageController> {
   Widget _bottomNavigationBar(BuildContext context) {
     return Obx(
       () => Padding(
-        padding:
-            const EdgeInsets.only(left: 16, right: 16, bottom: 20, top: 10),
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom: 20,
+          top: 10,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: HomePageMenu.values
@@ -79,11 +84,9 @@ class HomePage extends GetWidget<HomePageController> {
                         ),
                         Text(
                           item.label,
-                          style: TextStyle(
-                            color: item == controller.currentPage
-                                ? Theme.of(context).primaryColor
-                                : null,
-                          ),
+                          style: item == controller.currentPage
+                              ? CustomAppThemes.menuSelectedTextStyle
+                              : CustomAppThemes.menuNormalTextStyle,
                         ),
                       ],
                     ),
