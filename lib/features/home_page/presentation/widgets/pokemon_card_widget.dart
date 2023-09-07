@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pokedex/features/home_page/presentation/widgets/pokemon_type_tag_widget.dart';
 
 import '../../../../core/data/utils/app_theme.dart';
 
@@ -18,13 +19,10 @@ class PokemonCardWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: _content,
-            ),
+            child: _content,
           ),
           Positioned(right: 0, top: 0, bottom: 0, child: _pokeballOverlayImage),
-          Positioned(top: 16, right: 16, child: _favoriteButton),
+          Positioned(top: 10, right: 10, child: _favoriteButton),
         ],
       ),
     );
@@ -32,59 +30,50 @@ class PokemonCardWidget extends StatelessWidget {
 
   Widget get _content {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Flexible(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('#007'),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  'Squirtle',
-                  style: AppTheme.title25w600,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue[900],
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 5, horizontal: 10.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.radio_button_checked,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          'Water',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16, bottom: 16, top: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('#007'),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                    'Squirtle',
+                    style: AppTheme.title25w600,
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: _pokemonTypeTagsWidgets,
+                ),
+              ],
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0),
-          child: Container(
-            height: 120,
-            width: 100,
-            color: Colors.grey,
-          ),
-        ),
+        _pokemonImageWidget,
       ],
+    );
+  }
+
+  Widget get _pokemonTypeTagsWidgets {
+    return const Wrap(
+      spacing: 5,
+      runSpacing: 5,
+      children: [
+        PokemonTypeTagWidget(),
+      ],
+    );
+  }
+
+  Widget get _pokemonImageWidget {
+    return Container(
+      height: 150,
+      width: 120,
+      color: Colors.grey,
     );
   }
 
