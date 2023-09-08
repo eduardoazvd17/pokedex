@@ -129,7 +129,11 @@ class PokemonCardWidget extends StatelessWidget {
     );
   }
 
-  void _displayNotification(BuildContext context, bool isFavorite) {
+  Future<void> _displayNotification(
+    BuildContext context,
+    bool isFavorite,
+  ) async {
+    await Get.closeCurrentSnackbar();
     Get.showSnackbar(
       GetSnackBar(
         titleText: Container(),
