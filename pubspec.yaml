@@ -46,6 +46,7 @@ dependencies:
   flutter_svg: ^2.0.7
   flutter_animate: ^4.2.0+1
   hive_flutter: ^1.1.0
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

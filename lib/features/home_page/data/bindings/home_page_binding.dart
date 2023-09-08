@@ -7,9 +7,13 @@ import '../../presentation/controllers/favorites_view_controller.dart';
 
 class HomePageBinding extends Bindings {
   @override
-  void dependencies() {
+  void dependencies() async {
     Get.lazyPut(() => HomePageController());
-    Get.lazyPut(() => FavoritesViewController(service: PokemonsService()));
+    Get.lazyPut(
+      () => FavoritesViewController(
+        service: PokemonsService(),
+      ),
+    );
     Get.lazyPut(
       () => AllPokemonsViewController(
         service: PokemonsService(),
