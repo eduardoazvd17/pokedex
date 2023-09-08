@@ -12,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocalJsonLocalization.delegate.directories = ['lib/i18n'];
   await Hive.initFlutter();
+  await Hive.openBox('favoritesBox');
   runApp(const MyApp());
 }
 

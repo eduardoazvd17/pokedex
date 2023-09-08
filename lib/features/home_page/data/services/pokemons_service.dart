@@ -1,10 +1,10 @@
 import 'package:localization/localization.dart';
 import 'package:pokedex/core/data/exceptions/app_exception.dart';
-import 'package:pokedex/core/data/services/app_service.dart';
+import 'package:pokedex/core/data/repository/app_repository.dart';
 import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
 import 'package:pokedex/features/home_page/data/models/pokemon_model.dart';
 
-class PokemonsService extends AppService {
+class PokemonsService with AppRepository {
   static const String _endpoint = "https://pokeapi.co/api/v2";
 
   Future<List<PokemonModel>> loadPokemons({
@@ -51,5 +51,6 @@ class PokemonsService extends AppService {
   }
 
   Future<void> addToFavorites(PokemonModel model) async {}
+
   Future<void> removeFromFavorites(PokemonModel model) async {}
 }

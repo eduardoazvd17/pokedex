@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:localization/localization.dart';
 import 'package:pokedex/core/data/exceptions/app_exception.dart';
 
-class AppService {
+mixin AppRepository {
   Future<Map<String, dynamic>> get({
     required String url,
   }) async {
