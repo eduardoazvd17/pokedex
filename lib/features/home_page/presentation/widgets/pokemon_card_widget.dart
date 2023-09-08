@@ -159,7 +159,10 @@ class PokemonCardWidget extends StatelessWidget {
         padding: EdgeInsets.zero,
         borderColor: Colors.transparent,
         backgroundColor: Colors.transparent,
-        margin: EdgeInsets.only(top: 40, left: Get.width - 227),
+        margin: EdgeInsets.only(
+          top: (Get.width > 768) ? 180 : 40,
+          left: Get.width - ((Get.width > 768) ? 450 : 227),
+        ),
         duration: const Duration(seconds: 3),
         snackPosition: SnackPosition.TOP,
       ),
