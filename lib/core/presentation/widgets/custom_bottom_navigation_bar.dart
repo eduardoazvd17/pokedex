@@ -14,13 +14,11 @@ class CustomBottomNavigationBar<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        left: 16,
-        right: 16,
         bottom: 20,
         top: 10,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: items.map((item) {
           return InkWell(
             borderRadius: BorderRadius.circular(15),
