@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 enum PokemonType {
   normal,
@@ -32,7 +33,11 @@ extension PokemonTypeExtension on PokemonType {
 
   String get title => name.replaceFirst(name[0], name[0].toUpperCase());
 
-  Widget get icon => const Icon(Icons.ac_unit, size: 15, color: Colors.white);
+  Widget get icon => SvgPicture.asset(
+        'assets/icons/pokemon_types/$name.svg',
+        height: 10,
+        width: 10,
+      );
 
   Color get color => switch (this) {
         PokemonType.normal => const Color(0xff7D3600),
