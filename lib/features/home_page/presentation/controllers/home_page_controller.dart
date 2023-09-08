@@ -1,13 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:pokedex/core/presentation/controllers/app_notifications_controller.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 import 'package:simple_overlay/simple_overlay.dart';
 
 class HomePageController extends GetxController {
-  final NotificationsController notificationsController;
-  HomePageController({required this.notificationsController});
-
   @override
   void onInit() {
     pageController.addListener(() {

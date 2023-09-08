@@ -43,6 +43,6 @@ class AppNotificationWidget extends StatelessWidget {
           ),
         ),
       ),
-    ).animate().fade().slideY();
+    ).animate().fade();
   }
 }

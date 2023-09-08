@@ -42,11 +42,9 @@ class HomePage extends GetWidget<HomePageController> {
                 onPressed: () {},
                 icon: CustomAppIcons.settings(),
               ),
-              controller.notificationsController.notificationWidget(
-                IconButton(
-                  onPressed: () {},
-                  icon: CustomAppIcons.notification(),
-                ),
+              IconButton(
+                onPressed: () {},
+                icon: CustomAppIcons.notification(),
               ),
             ],
           ),

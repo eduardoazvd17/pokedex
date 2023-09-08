@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_type_tag_widget.dart';
 
 import '../../../../core/data/utils/custom_app_themes.dart';
 import '../../../../core/data/utils/custom_app_icons.dart';
+import '../../../../core/presentation/widgets/app_notification_widget.dart';
 import '../../data/models/pokemon_model.dart';
 
 class PokemonCardWidget extends StatelessWidget {
@@ -118,8 +121,41 @@ class PokemonCardWidget extends StatelessWidget {
 
   Widget _favoriteButton(BuildContext context) {
     return IconButton(
-      onPressed: () => toggleFavorite.call(pokemonModel),
+      onPressed: () {
+        _displayNotification(context, isFavorite);
+        toggleFavorite.call(pokemonModel);
+      },
       icon: CustomAppIcons.heart(isSelected: isFavorite, size: 35),
+    );
+  }
+
+  void _displayNotification(BuildContext context, bool isFavorite) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        padding: EdgeInsets.zero,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        content: isFavorite
+            ? AppNotificationWidget(
+                icon: CustomAppIcons.heart(),
+                text: 'removed-from-favorite'.i18n(),
+              )
+            : AppNotificationWidget(
+                icon: CustomAppIcons.heart(isSelected: true),
+                text: 'added-to-favorite'.i18n(),
+              ),
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 2),
+        margin: EdgeInsets.only(
+          bottom: Get.height - Get.statusBarHeight - 70,
+          left: 80,
+          right: 20,
+        ),
+        dismissDirection: DismissDirection.up,
+      ),
     );
   }
 }
