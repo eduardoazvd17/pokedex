@@ -25,7 +25,7 @@ class PokemonCardWidget extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 382),
       child: Padding(
-        padding: const EdgeInsets.all(5),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Stack(
           children: [
             SizedBox(
