@@ -61,7 +61,20 @@ class FavoritesPokemonsListView extends GetWidget<FavoritesViewController> {
 
   Widget get _mobileHeaderWidget {
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth > 768) return Container();
+      if (constraints.maxWidth > 768) {
+        return Padding(
+          padding: const EdgeInsets.only(
+            left: 70,
+            right: 70,
+            bottom: 50,
+          ),
+          child: Text(
+            'favorites-pokemons-list-view-header'.i18n(),
+            style: CustomAppThemes.headerTextStyle,
+          ),
+        );
+      }
+
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -84,7 +97,7 @@ class FavoritesPokemonsListView extends GetWidget<FavoritesViewController> {
       alignment: WrapAlignment.center,
       runAlignment: WrapAlignment.center,
       spacing: 5,
-      runSpacing: 5,
+      runSpacing: 15,
       children: controller.favorites
           .map(
             (pokemonModel) => PokemonCardWidget(

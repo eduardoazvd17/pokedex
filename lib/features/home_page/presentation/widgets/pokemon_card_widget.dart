@@ -24,7 +24,7 @@ class PokemonCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 400),
+      constraints: const BoxConstraints(maxWidth: 382),
       child: Padding(
         padding: const EdgeInsets.all(2.5),
         child: Stack(

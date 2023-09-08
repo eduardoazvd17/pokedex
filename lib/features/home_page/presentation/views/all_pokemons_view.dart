@@ -70,7 +70,20 @@ class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
 
   Widget get _mobileHeaderWidget {
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth > 768) return Container();
+      if (constraints.maxWidth > 768) {
+        return Padding(
+          padding: const EdgeInsets.only(
+            left: 70,
+            right: 70,
+            bottom: 50,
+          ),
+          child: Text(
+            'all-pokemons-list-view-header'.i18n(),
+            style: CustomAppThemes.headerTextStyle,
+          ),
+        );
+      }
+
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -93,7 +106,7 @@ class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
       alignment: WrapAlignment.center,
       runAlignment: WrapAlignment.center,
       spacing: 5,
-      runSpacing: 5,
+      runSpacing: 15,
       children: controller.pokemons.map((pokemonModel) {
         return PokemonCardWidget(
           pokemonModel: pokemonModel,
