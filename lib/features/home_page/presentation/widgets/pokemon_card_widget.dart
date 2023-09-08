@@ -24,7 +24,7 @@ class PokemonCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 450),
+      constraints: const BoxConstraints(maxWidth: 400),
       child: Padding(
         padding: const EdgeInsets.all(2.5),
         child: Stack(
@@ -145,6 +145,7 @@ class PokemonCardWidget extends StatelessWidget {
     await Get.closeCurrentSnackbar();
     Get.showSnackbar(
       GetSnackBar(
+        maxWidth: 207,
         titleText: Container(),
         messageText: isFavorite
             ? AppNotificationWidget(
@@ -158,7 +159,7 @@ class PokemonCardWidget extends StatelessWidget {
         padding: EdgeInsets.zero,
         borderColor: Colors.transparent,
         backgroundColor: Colors.transparent,
-        margin: const EdgeInsets.only(top: 40, left: 80, right: 20),
+        margin: EdgeInsets.only(top: 40, left: Get.width - 227),
         duration: const Duration(seconds: 3),
         snackPosition: SnackPosition.TOP,
       ),

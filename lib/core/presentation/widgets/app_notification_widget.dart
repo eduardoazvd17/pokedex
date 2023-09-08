@@ -20,7 +20,6 @@ class AppNotificationWidget extends StatelessWidget {
       elevation: 8,
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Container(
-        width: 207,
         decoration: BoxDecoration(
           border: Border.all(
             color: const Color(0xFFFFD600),
