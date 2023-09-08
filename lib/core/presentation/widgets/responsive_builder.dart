@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ResponsiveBuilder extends StatelessWidget {
@@ -16,7 +17,7 @@ class ResponsiveBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (_, __) {
-        if (MediaQuery.of(context).size.width >= maxMobileWidth) {
+        if (MediaQuery.of(context).size.width >= maxMobileWidth && kIsWeb) {
           return desktopWidget ?? const SizedBox();
         } else {
           return mobileWidget ?? const SizedBox();
