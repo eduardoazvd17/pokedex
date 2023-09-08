@@ -12,29 +12,30 @@ class NotificationsController extends GetxController {
   final SimpleOverlayController removedFromFavoritesNotificaitonController =
       SimpleOverlayController();
 
+  SimpleOverlayPosition get _position =>
+      SimpleOverlayPosition.bottomLeft(left: -40);
+  SimpleOverlayConfiguration get _configuration => SimpleOverlayConfiguration(
+        hideOnTapOutside: true,
+        autoHideDuration: const Duration(seconds: 1),
+      );
+
   Widget notificationWidget(Widget child) {
     return SimpleOverlayWidget(
       controller: addedToFavoritesNotificationController,
-      position: SimpleOverlayPosition.bottomLeft(left: -40),
+      position: _position,
       overlayWidget: AppNotificationWidget(
         icon: CustomAppIcons.heart(isSelected: true),
         text: 'added-to-favorite'.i18n(),
       ),
-      configuration: SimpleOverlayConfiguration(
-        hideOnTapOutside: true,
-        autoHideDuration: const Duration(seconds: 2),
-      ),
+      configuration: _configuration,
       child: SimpleOverlayWidget(
         controller: removedFromFavoritesNotificaitonController,
-        position: SimpleOverlayPosition.bottomLeft(left: -40),
+        position: _position,
         overlayWidget: AppNotificationWidget(
           icon: CustomAppIcons.heart(),
           text: 'removed-from-favorite'.i18n(),
         ),
-        configuration: SimpleOverlayConfiguration(
-          hideOnTapOutside: true,
-          autoHideDuration: const Duration(seconds: 2),
-        ),
+        configuration: _configuration,
         child: child,
       ),
     );
