@@ -6,8 +6,8 @@ import 'package:pokedex/features/home_page/presentation/controllers/favorites_vi
 import '../../../../core/data/utils/custom_app_themes.dart';
 import '../../../../core/presentation/widgets/app_info_widget.dart';
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
+import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../widgets/pokemon_card_widget.dart';
-import '../widgets/pokemon_logo_widget.dart';
 
 class FavoritesPokemonsListView extends GetWidget<FavoritesViewController> {
   const FavoritesPokemonsListView({super.key});
@@ -23,73 +23,56 @@ class FavoritesPokemonsListView extends GetWidget<FavoritesViewController> {
     });
 
     return Obx(
-      () => Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15),
-        child: controller.error != null ||
-                controller.isLoading ||
-                controller.favorites.isEmpty
-            ? Column(
-                children: [
-                  _mobileHeaderWidget,
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        controller.error ??
-                            (controller.favorites.isEmpty
-                                ? AppInfoWidget(
-                                    message: 'empty-favorites'.i18n(),
-                                  )
-                                : const AppLoadingWidget()),
-                      ],
-                    ),
+      () => controller.error != null ||
+              controller.isLoading ||
+              controller.favorites.isEmpty
+          ? Column(
+              children: [
+                _responsiveHeaderWidget,
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      controller.error ??
+                          (controller.favorites.isEmpty
+                              ? AppInfoWidget(
+                                  message: 'empty-favorites'.i18n(),
+                                )
+                              : const AppLoadingWidget()),
+                    ],
                   ),
-                ],
-              )
-            : ListView(
-                controller: scrollController,
-                children: [
-                  _mobileHeaderWidget,
-                  _favoritesPokemonsListWidget,
-                ],
-              ),
-      ),
+                ),
+              ],
+            )
+          : ListView(
+              controller: scrollController,
+              children: [
+                _responsiveHeaderWidget,
+                _favoritesPokemonsListWidget,
+              ],
+            ),
     );
   }
 
-  Widget get _mobileHeaderWidget {
-    return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth > 768) {
-        return Padding(
-          padding: const EdgeInsets.only(
-            left: 70,
-            right: 70,
-            bottom: 50,
-          ),
-          child: Text(
-            'favorites-pokemons-list-view-header'.i18n(),
-            style: CustomAppThemes.headerTextStyle,
-          ),
-        );
-      }
-
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const PokemonLogoWidget(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'favorites-pokemons-list-view-header'.i18n(),
-              style: CustomAppThemes.headerTextStyle,
-            ),
-          ),
-          const SizedBox(height: 20),
-        ],
-      );
-    });
+  Widget get _responsiveHeaderWidget {
+    return ResponsiveBuilder(
+      mobileWidget: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+        child: Text(
+          'favorites-pokemons-list-view-header'.i18n(),
+          style: CustomAppThemes.headerTextStyle,
+        ),
+      ),
+      desktopWidget: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 140),
+        child: Text(
+          'favorites-pokemons-list-view-header'.i18n(),
+          style: CustomAppThemes.headerTextStyle,
+        ),
+      ),
+    );
   }
 
   Widget get _favoritesPokemonsListWidget {

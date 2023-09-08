@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/core/data/utils/custom_app_themes.dart';
-
-import '../widgets/pokemon_logo_widget.dart';
+import 'package:pokedex/core/presentation/widgets/responsive_builder.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -10,14 +9,9 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        LayoutBuilder(builder: (context, constraints) {
-          if (constraints.maxWidth > 768) return Container();
-          return const PokemonLogoWidget();
-        }),
         Column(
           children: [
-            _userAvatarWidget,
-            const SizedBox(height: 35),
+            _responsiveHeaderWidget,
             Text(
               'Eduardo Azevedo',
               textAlign: TextAlign.center,
@@ -31,6 +25,19 @@ class ProfileView extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+
+  Widget get _responsiveHeaderWidget {
+    return ResponsiveBuilder(
+      mobileWidget: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+        child: _userAvatarWidget,
+      ),
+      desktopWidget: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 140),
+        child: _userAvatarWidget,
+      ),
     );
   }
 

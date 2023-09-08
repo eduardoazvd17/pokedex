@@ -5,13 +5,10 @@ class PokemonLogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 35.0),
-      child: Image.asset(
-        'assets/images/pokemon-logo.png',
-        width: 149,
-        height: 60,
-      ),
+    return Image.asset(
+      'assets/images/pokemon-logo.png',
+      width: 149,
+      height: 60,
     );
   }
 }

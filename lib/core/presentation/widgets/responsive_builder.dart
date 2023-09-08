@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ResponsibleBuilder extends StatelessWidget {
+class ResponsiveBuilder extends StatelessWidget {
   final int maxMobileWidth;
   final Widget? mobileWidget;
   final Widget? desktopWidget;
 
-  const ResponsibleBuilder({
+  const ResponsiveBuilder({
     super.key,
     this.maxMobileWidth = 768,
-    required this.mobileWidget,
-    required this.desktopWidget,
+    this.mobileWidget,
+    this.desktopWidget,
   });
 
   @override

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokedex/core/data/utils/app_sizes.dart';
 import 'package:pokedex/core/data/utils/custom_app_themes.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_logo_widget.dart';
@@ -8,7 +7,7 @@ import 'package:pokedex/features/home_page/presentation/widgets/pokemon_logo_wid
 import '../../../../core/data/utils/custom_app_icons.dart';
 import '../../../../core/presentation/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/presentation/widgets/custom_top_navigation_bar.dart';
-import '../../../../core/presentation/widgets/responsible_builder.dart';
+import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../controllers/home_page_controller.dart';
 
 class HomePage extends GetWidget<HomePageController> {
@@ -20,9 +19,9 @@ class HomePage extends GetWidget<HomePageController> {
       body: SafeArea(
         child: Column(
           children: [
-            ResponsibleBuilder(
-              mobileWidget: _mobileHeader,
-              desktopWidget: _desktopHeader,
+            ResponsiveBuilder(
+              mobileWidget: _mobileAppBar,
+              desktopWidget: _desktopAppBar,
             ),
             Expanded(
               child: PageView(
@@ -33,17 +32,18 @@ class HomePage extends GetWidget<HomePageController> {
           ],
         ),
       ),
-      bottomNavigationBar: _mobileBottomNavigationBar(context),
+      bottomNavigationBar: _bottomNavigationBar(context),
     );
   }
 
-  Widget get _mobileHeader {
+  Widget get _mobileAppBar {
     return Padding(
-      padding: const EdgeInsets.all(AppSizes.mobileAppPadding),
-      child: Column(
+      padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
+      child: Stack(
+        alignment: Alignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.only(bottom: 50.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -58,17 +58,24 @@ class HomePage extends GetWidget<HomePageController> {
               ],
             ),
           ),
+          const Positioned(bottom: 10, child: PokemonLogoWidget()),
         ],
       ),
     );
   }
 
-  Widget get _desktopHeader {
+  Widget get _desktopAppBar {
     return Padding(
-      padding: const EdgeInsets.all(AppSizes.desktopAppPadding),
+      padding: const EdgeInsets.only(
+        top: 35,
+        left: 124,
+        right: 124,
+        bottom: 10,
+      ),
       child: Column(
         children: [
           const PokemonLogoWidget(),
+          const SizedBox(height: 35),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -98,7 +105,7 @@ class HomePage extends GetWidget<HomePageController> {
                     onPressed: () {},
                     icon: CustomAppIcons.notification(),
                   ),
-                  const SizedBox(width: AppSizes.desktopWidgetSpacing),
+                  const SizedBox(width: 20),
                   IconButton(
                     onPressed: () {},
                     icon: CustomAppIcons.settings(),
@@ -112,8 +119,8 @@ class HomePage extends GetWidget<HomePageController> {
     );
   }
 
-  Widget _mobileBottomNavigationBar(BuildContext context) {
-    return ResponsibleBuilder(
+  Widget _bottomNavigationBar(BuildContext context) {
+    return ResponsiveBuilder(
       mobileWidget: Obx(
         () => CustomBottomNavigationBar(
           onChange: controller.changePage,
