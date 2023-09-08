@@ -3,15 +3,22 @@ import 'package:pokedex/features/home_page/data/services/pokemons_service.dart';
 import 'package:pokedex/features/home_page/presentation/controllers/all_pokemons_view_controller.dart';
 import 'package:pokedex/features/home_page/presentation/controllers/home_page_controller.dart';
 
+import '../../../../core/presentation/controllers/app_notifications_controller.dart';
 import '../../presentation/controllers/favorites_view_controller.dart';
 
 class HomePageBinding extends Bindings {
   @override
   void dependencies() async {
-    Get.lazyPut(() => HomePageController());
+    Get.lazyPut(() => NotificationsController());
+    Get.lazyPut(
+      () => HomePageController(
+        notificationsController: Get.find<NotificationsController>(),
+      ),
+    );
     Get.lazyPut(
       () => FavoritesViewController(
         service: PokemonsService(),
+        notificationsController: Get.find<NotificationsController>(),
       ),
     );
     Get.lazyPut(

@@ -413,6 +413,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  simple_overlay:
+    dependency: "direct main"
+    description:
+      name: simple_overlay
+      sha256: f535a3e7237051d8fa73b7a2903f2ad2949ac785e662b7d950daf73c28ebbefd
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   sky_engine:
     dependency: transitive
     description: flutter

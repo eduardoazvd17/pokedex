@@ -8,5 +8,7 @@
     "favorites-pokemons-list-view-header": "Meus Pokémons favoritos",
     "try-again": "Tentar novamente",
     "loading": "Carregando...",
-    "empty-favorites": "Você ainda não favoritou nenhum Pokémon."
+    "empty-favorites": "Você ainda não favoritou nenhum Pokémon.",
+    "added-to-favorite": "Pokemón adicionado aos favoritos",
+    "removed-from-favorite": "Pokémon removido dos favoritos"
 }

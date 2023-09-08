@@ -6,6 +6,11 @@ class CustomAppThemes {
   static Color get backgroundColor => Colors.white;
   static Color get foregroundColor => Colors.black;
 
+  static TextStyle get snackbarTextStyle => const TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
+      );
+
   static TextStyle get menuNormalTextStyle => const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w600,

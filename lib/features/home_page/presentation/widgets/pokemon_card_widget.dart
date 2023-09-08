@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pokedex/core/presentation/widgets/app_notification_widget.dart';
 import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_type_tag_widget.dart';
 
@@ -51,7 +52,7 @@ class PokemonCardWidget extends StatelessWidget {
             right: 0,
             child: _pokemonContentWidget,
           ),
-          Positioned(top: 16, right: 16, child: _favoriteButton),
+          Positioned(top: 16, right: 16, child: _favoriteButton(context)),
         ],
       ),
     );
@@ -116,7 +117,7 @@ class PokemonCardWidget extends StatelessWidget {
     );
   }
 
-  Widget get _favoriteButton {
+  Widget _favoriteButton(BuildContext context) {
     return IconButton(
       onPressed: () => toggleFavorite.call(pokemonModel),
       icon: CustomAppIcons.heart(isSelected: isFavorite, size: 35),
