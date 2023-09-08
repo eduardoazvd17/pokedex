@@ -12,21 +12,16 @@ class CustomTopNavigationBar<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 20,
-        top: 10,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: items.map((item) {
-          return InkWell(
-            borderRadius: BorderRadius.circular(15),
-            onTap: () => onChange.call(item.value),
-            child: item.toWidget(),
-          );
-        }).toList(),
-      ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: items.map((item) {
+        return InkWell(
+          borderRadius: BorderRadius.circular(15),
+          onTap: () => onChange.call(item.value),
+          child: item.toWidget(),
+        );
+      }).toList(),
     );
   }
 }
@@ -44,10 +39,7 @@ class CustomTopNavigationItem<T> {
 
   Widget toWidget() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 5,
-      ),
+      padding: const EdgeInsets.all(16),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
