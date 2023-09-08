@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:pokedex/features/home_page/presentation/controllers/home_page_controller.dart';
+import 'package:pokedex/features/home_page/presentation/controllers/all_pokemons_view_controller.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_card_widget.dart';
 
 import '../../../../core/data/utils/custom_app_themes.dart';
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 import '../widgets/pokemon_logo_widget.dart';
 
-class AllPokemonsListView extends GetWidget<HomePageController> {
-  const AllPokemonsListView({super.key});
+class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
+  const AllPokemonsView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final scrollController = ScrollController(
-      initialScrollOffset: controller.allPokemonsListScrollOffset,
+      initialScrollOffset: controller.scrollOffset,
     );
+
     scrollController.addListener(() {
-      controller.allPokemonsListScrollOffset = scrollController.offset;
+      controller.scrollOffset = scrollController.offset;
     });
 
     return Obx(
@@ -25,7 +26,7 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
         padding: const EdgeInsets.only(left: 15, right: 15),
         child: controller.error != null ||
                 controller.isLoading ||
-                controller.allPokemons.isEmpty
+                controller.pokemons.isEmpty
             ? Column(
                 children: [
                   _headerWidget,
@@ -45,7 +46,7 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
                 onNotification: (ScrollNotification scrollInfo) {
                   if (scrollInfo.metrics.pixels >=
                           (scrollInfo.metrics.maxScrollExtent - 50) &&
-                      !controller.isLoadingMore) {
+                      !controller.isLoadingMorePokemons) {
                     controller.loadPokemons();
                   }
                   return true;
@@ -55,7 +56,7 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
                   children: [
                     _headerWidget,
                     _pokemonsListWidget,
-                    if (controller.isLoadingMore)
+                    if (controller.isLoadingMorePokemons)
                       const Padding(
                         padding: EdgeInsets.all(25.0),
                         child: AppLoadingWidget(),
@@ -86,15 +87,15 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
 
   Widget get _pokemonsListWidget {
     return Column(
-      children: controller.allPokemons
-          .map(
-            (pokemonModel) => PokemonCardWidget(
-              pokemonModel: pokemonModel,
-              isFavorite: controller.favoritesPokemons.contains(pokemonModel),
-              toggleFavorite: controller.toggleFavorite,
-            ),
-          )
-          .toList(),
+      children: controller.pokemons.map((pokemonModel) {
+        return PokemonCardWidget(
+          pokemonModel: pokemonModel,
+          isFavorite: controller.favoritesViewController.favorites.contains(
+            pokemonModel,
+          ),
+          toggleFavorite: controller.favoritesViewController.toggleFavorite,
+        );
+      }).toList(),
     );
   }
 }

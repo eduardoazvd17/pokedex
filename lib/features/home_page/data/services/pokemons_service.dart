@@ -4,7 +4,7 @@ import 'package:pokedex/core/data/services/app_service.dart';
 import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
 import 'package:pokedex/features/home_page/data/models/pokemon_model.dart';
 
-class HomeService extends AppService {
+class PokemonsService extends AppService {
   static const String _endpoint = "https://pokeapi.co/api/v2";
 
   Future<List<PokemonModel>> loadPokemons({
@@ -45,4 +45,11 @@ class HomeService extends AppService {
       );
     }
   }
+
+  Future<List<PokemonModel>> loadFavorites() async {
+    return [];
+  }
+
+  Future<void> addToFavorites(PokemonModel model) async {}
+  Future<void> removeFromFavorites(PokemonModel model) async {}
 }
