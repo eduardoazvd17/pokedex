@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomAppThemes {
+class AppTheme {
   static Color get primaryColor => Colors.red;
   static Color get backgroundColor => Colors.white;
   static Color get foregroundColor => Colors.black;

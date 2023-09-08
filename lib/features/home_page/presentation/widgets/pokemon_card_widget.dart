@@ -5,8 +5,8 @@ import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_type_tag_widget.dart';
 
-import '../../../../core/data/utils/custom_app_themes.dart';
-import '../../../../core/data/utils/custom_app_icons.dart';
+import '../../../../core/data/utils/app_theme.dart';
+import '../../../../core/data/utils/app_icons.dart';
 import '../../../../core/presentation/widgets/app_notification_widget.dart';
 import '../../data/models/pokemon_model.dart';
 
@@ -77,14 +77,14 @@ class PokemonCardWidget extends StatelessWidget {
             children: [
               Text(
                 pokemonModel.formattedOrder,
-                style: CustomAppThemes.bodySmallTextStyle,
+                style: AppTheme.bodySmallTextStyle,
               ),
               Flexible(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Text(
                     pokemonModel.name,
-                    style: CustomAppThemes.headerSmallTextStyle,
+                    style: AppTheme.headerSmallTextStyle,
                   ),
                 ),
               ),
@@ -134,7 +134,7 @@ class PokemonCardWidget extends StatelessWidget {
         _displayNotification(context, isFavorite);
         toggleFavorite.call(pokemonModel);
       },
-      icon: CustomAppIcons.heart(isSelected: isFavorite, size: 35),
+      icon: AppIcons.heart(isSelected: isFavorite, size: 35),
     );
   }
 
@@ -149,11 +149,11 @@ class PokemonCardWidget extends StatelessWidget {
         titleText: Container(),
         messageText: isFavorite
             ? AppNotificationWidget(
-                icon: CustomAppIcons.heart(),
+                icon: AppIcons.heart(),
                 text: 'removed-from-favorite'.i18n(),
               )
             : AppNotificationWidget(
-                icon: CustomAppIcons.heart(isSelected: true),
+                icon: AppIcons.heart(isSelected: true),
                 text: 'added-to-favorite'.i18n(),
               ),
         padding: EdgeInsets.zero,

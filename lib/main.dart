@@ -6,7 +6,7 @@ import 'package:pokedex/features/home_page/data/bindings/home_page_binding.dart'
 import 'package:pokedex/features/home_page/presentation/pages/home_page.dart';
 import 'package:get/get.dart';
 
-import 'core/data/utils/custom_app_themes.dart';
+import 'core/data/utils/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Pokedex',
-      theme: CustomAppThemes.lightTheme,
+      theme: AppTheme.lightTheme,
       localizationsDelegates: _localizationsDelegates,
       supportedLocales: _supportedLocales,
       localeResolutionCallback: _localeResolutionCallback,

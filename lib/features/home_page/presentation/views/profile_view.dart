@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/core/data/utils/custom_app_themes.dart';
+import 'package:pokedex/core/data/utils/app_theme.dart';
 import 'package:pokedex/core/presentation/widgets/responsive_builder.dart';
 
 class ProfileView extends StatelessWidget {
@@ -15,12 +15,12 @@ class ProfileView extends StatelessWidget {
             Text(
               'Eduardo Azevedo',
               textAlign: TextAlign.center,
-              style: CustomAppThemes.headerTextStyle,
+              style: AppTheme.headerTextStyle,
             ),
             Text(
               'Software Egineer',
               textAlign: TextAlign.center,
-              style: CustomAppThemes.bodySmallGreyTextStyle,
+              style: AppTheme.bodySmallGreyTextStyle,
             ),
           ],
         ),

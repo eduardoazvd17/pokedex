@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokedex/core/data/utils/custom_app_themes.dart';
+import 'package:pokedex/core/data/utils/app_theme.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_logo_widget.dart';
 
-import '../../../../core/data/utils/custom_app_icons.dart';
+import '../../../../core/data/utils/app_icons.dart';
 import '../../../../core/presentation/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/presentation/widgets/custom_top_navigation_bar.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
@@ -49,11 +49,11 @@ class HomePage extends GetWidget<HomePageController> {
               children: [
                 IconButton(
                   onPressed: () {},
-                  icon: CustomAppIcons.settings(),
+                  icon: AppIcons.settings(),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: CustomAppIcons.notification(),
+                  icon: AppIcons.notification(),
                 ),
               ],
             ),
@@ -91,8 +91,8 @@ class HomePage extends GetWidget<HomePageController> {
                         label: Text(
                           item.label,
                           style: isSelected
-                              ? CustomAppThemes.menuSelectedTextStyle
-                              : CustomAppThemes.menuNormalTextStyle,
+                              ? AppTheme.menuSelectedTextStyle
+                              : AppTheme.menuNormalTextStyle,
                         ),
                       );
                     }).toList(),
@@ -103,12 +103,12 @@ class HomePage extends GetWidget<HomePageController> {
                 children: [
                   IconButton(
                     onPressed: () {},
-                    icon: CustomAppIcons.notification(),
+                    icon: AppIcons.notification(),
                   ),
                   const SizedBox(width: 20),
                   IconButton(
                     onPressed: () {},
-                    icon: CustomAppIcons.settings(),
+                    icon: AppIcons.settings(),
                   ),
                 ],
               ),
@@ -132,8 +132,8 @@ class HomePage extends GetWidget<HomePageController> {
               label: Text(
                 item.label,
                 style: isSelected
-                    ? CustomAppThemes.menuSelectedTextStyle
-                    : CustomAppThemes.menuNormalTextStyle,
+                    ? AppTheme.menuSelectedTextStyle
+                    : AppTheme.menuNormalTextStyle,
               ),
             );
           }).toList(),
