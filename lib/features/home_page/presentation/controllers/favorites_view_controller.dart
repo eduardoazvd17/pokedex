@@ -1,12 +1,9 @@
 import 'package:get/get.dart';
-import 'package:localization/localization.dart';
 import 'package:pokedex/core/presentation/widgets/app_error_widget.dart';
 import 'package:pokedex/features/home_page/data/models/pokemon_model.dart';
 
 import '../../../../core/data/exceptions/app_exception.dart';
-import '../../../../core/data/utils/custom_app_icons.dart';
 import '../../../../core/presentation/controllers/app_notifications_controller.dart';
-import '../../../../core/presentation/widgets/app_notification_widget.dart';
 import '../../data/services/pokemons_service.dart';
 
 class FavoritesViewController extends GetxController {
