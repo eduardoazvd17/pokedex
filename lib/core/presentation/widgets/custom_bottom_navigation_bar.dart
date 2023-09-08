@@ -52,7 +52,7 @@ class CustomBottomNavigationItem<T> {
       fontWeight: FontWeight.w600,
     );
 
-    final selectedStyle = TextStyle(
+    const selectedStyle = TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w800,
       color: AppTheme.primaryColor,

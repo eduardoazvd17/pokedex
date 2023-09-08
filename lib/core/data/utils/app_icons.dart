@@ -61,8 +61,10 @@ class AppIcons {
 
   static Widget _svgAsset(String asset,
       {bool isSelected = false, double? size}) {
-    final ColorFilter selectedFilter =
-        ColorFilter.mode(AppTheme.primaryColor, BlendMode.srcIn);
+    const ColorFilter selectedFilter = ColorFilter.mode(
+      AppTheme.primaryColor,
+      BlendMode.srcIn,
+    );
 
     return SizedBox(
       height: size ?? 24,

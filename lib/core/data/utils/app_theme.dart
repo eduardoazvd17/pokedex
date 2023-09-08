@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static Color get primaryColor => Colors.red;
+  static const Color primaryColor = Colors.red;
 
   static ThemeData get lightTheme => ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -17,6 +17,9 @@ class AppTheme {
   static ThemeData get darkTheme => ThemeData(
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryColor,
+        secondary: primaryColor,
+        tertiary: primaryColor,
+        background: Colors.black,
         surfaceTint: Colors.black,
         brightness: Brightness.dark,
       ),
