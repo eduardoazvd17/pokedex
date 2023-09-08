@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/data/bindings/home_page_binding.dart';
 import 'package:pokedex/features/home_page/presentation/pages/home_page.dart';
@@ -7,8 +8,10 @@ import 'package:get/get.dart';
 
 import 'core/data/utils/custom_app_themes.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   LocalJsonLocalization.delegate.directories = ['lib/i18n'];
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 
