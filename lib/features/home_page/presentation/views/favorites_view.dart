@@ -77,7 +77,11 @@ class FavoritesPokemonsListView extends GetWidget<FavoritesViewController> {
   }
 
   Widget get _favoritesPokemonsListWidget {
-    return Column(
+    return Wrap(
+      alignment: WrapAlignment.center,
+      runAlignment: WrapAlignment.center,
+      spacing: 5,
+      runSpacing: 5,
       children: controller.favorites
           .map(
             (pokemonModel) => PokemonCardWidget(
