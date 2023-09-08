@@ -34,13 +34,6 @@ class PokemonCardWidget extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Container(
-                      width: double.maxFinite,
-                      color: pokemonModel.types.first.backgroundColor,
-                    ),
-                  ),
                   Positioned(
                     top: 0,
                     right: 0,
