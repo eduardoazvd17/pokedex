@@ -5,7 +5,6 @@ import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_type_tag_widget.dart';
 
-import '../../../../core/data/utils/app_theme.dart';
 import '../../../../core/data/utils/app_icons.dart';
 import '../../../../core/presentation/widgets/app_notification_widget.dart';
 import '../../data/models/pokemon_model.dart';
@@ -77,14 +76,22 @@ class PokemonCardWidget extends StatelessWidget {
             children: [
               Text(
                 pokemonModel.formattedOrder,
-                style: AppTheme.bodySmallTextStyle,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               Flexible(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Text(
                     pokemonModel.name,
-                    style: AppTheme.headerSmallTextStyle,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),

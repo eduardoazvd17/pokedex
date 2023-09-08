@@ -5,7 +5,6 @@ import 'package:pokedex/core/presentation/widgets/responsive_builder.dart';
 import 'package:pokedex/features/home_page/presentation/controllers/all_pokemons_view_controller.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_card_widget.dart';
 
-import '../../../../core/data/utils/app_theme.dart';
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 
 class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
@@ -73,7 +72,10 @@ class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
         Expanded(
           child: Text(
             'all-pokemons-list-view-header'.i18n(),
-            style: AppTheme.headerTextStyle,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ],

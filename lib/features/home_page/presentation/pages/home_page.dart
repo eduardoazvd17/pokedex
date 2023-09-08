@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokedex/core/data/utils/app_theme.dart';
 import 'package:pokedex/features/home_page/data/enums/home_page_menu.dart';
 import 'package:pokedex/features/home_page/presentation/widgets/pokemon_logo_widget.dart';
 
@@ -87,13 +86,9 @@ class HomePage extends GetWidget<HomePageController> {
                       final bool isSelected = controller.currentPage == item;
                       return CustomTopNavigationItem(
                         value: item,
+                        isSelected: isSelected,
                         icon: item.icon(isSelected: isSelected),
-                        label: Text(
-                          item.label,
-                          style: isSelected
-                              ? AppTheme.menuSelectedTextStyle
-                              : AppTheme.menuNormalTextStyle,
-                        ),
+                        label: item.label,
                       );
                     }).toList(),
                   ),
@@ -128,13 +123,9 @@ class HomePage extends GetWidget<HomePageController> {
             final bool isSelected = controller.currentPage == item;
             return CustomBottomNavigationItem(
               value: item,
+              isSelected: isSelected,
               icon: item.icon(isSelected: isSelected),
-              label: Text(
-                item.label,
-                style: isSelected
-                    ? AppTheme.menuSelectedTextStyle
-                    : AppTheme.menuNormalTextStyle,
-              ),
+              label: item.label,
             );
           }).toList(),
         ),

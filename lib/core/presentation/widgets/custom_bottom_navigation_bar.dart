@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../data/utils/app_theme.dart';
+
 class CustomBottomNavigationBar<T> extends StatelessWidget {
   final void Function(T) onChange;
   final List<CustomBottomNavigationItem<T>> items;
@@ -33,16 +35,29 @@ class CustomBottomNavigationBar<T> extends StatelessWidget {
 
 class CustomBottomNavigationItem<T> {
   final T value;
+  final bool isSelected;
   final Widget icon;
-  final Text label;
+  final String label;
 
   CustomBottomNavigationItem({
     required this.value,
+    required this.isSelected,
     required this.icon,
     required this.label,
   });
 
   Widget toWidget() {
+    const normalStyle = TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+    );
+
+    final selectedStyle = TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w800,
+      color: AppTheme.primaryColor,
+    );
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 16.0,
@@ -55,7 +70,7 @@ class CustomBottomNavigationItem<T> {
             padding: const EdgeInsets.only(bottom: 16.0),
             child: icon,
           ),
-          label,
+          Text(label, style: isSelected ? selectedStyle : normalStyle),
         ],
       ),
     );

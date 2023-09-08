@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../data/utils/app_theme.dart';
+
 class CustomTopNavigationBar<T> extends StatelessWidget {
   final void Function(T) onChange;
   final List<CustomTopNavigationItem<T>> items;
@@ -28,16 +30,29 @@ class CustomTopNavigationBar<T> extends StatelessWidget {
 
 class CustomTopNavigationItem<T> {
   final T value;
+  final bool isSelected;
   final Widget icon;
-  final Text label;
+  final String label;
 
   CustomTopNavigationItem({
     required this.value,
+    required this.isSelected,
     required this.icon,
     required this.label,
   });
 
   Widget toWidget() {
+    const normalStyle = TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+    );
+
+    final selectedStyle = TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w800,
+      color: AppTheme.primaryColor,
+    );
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Row(
@@ -47,7 +62,7 @@ class CustomTopNavigationItem<T> {
             padding: const EdgeInsets.only(right: 16.0),
             child: icon,
           ),
-          label,
+          Text(label, style: isSelected ? selectedStyle : normalStyle),
         ],
       ),
     );

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/presentation/controllers/favorites_view_controller.dart';
 
-import '../../../../core/data/utils/app_theme.dart';
 import '../../../../core/presentation/widgets/app_info_widget.dart';
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
@@ -62,7 +61,10 @@ class FavoritesPokemonsListView extends GetWidget<FavoritesViewController> {
         Expanded(
           child: Text(
             'favorites-pokemons-list-view-header'.i18n(),
-            style: AppTheme.headerTextStyle,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/core/data/utils/app_theme.dart';
 import 'package:pokedex/core/presentation/widgets/responsive_builder.dart';
 
 class ProfileView extends StatelessWidget {
@@ -12,15 +11,22 @@ class ProfileView extends StatelessWidget {
         Column(
           children: [
             _responsiveHeaderWidget,
-            Text(
+            const Text(
               'Eduardo Azevedo',
               textAlign: TextAlign.center,
-              style: AppTheme.headerTextStyle,
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            Text(
+            const Text(
               'Software Egineer',
               textAlign: TextAlign.center,
-              style: AppTheme.bodySmallGreyTextStyle,
+              style: TextStyle(
+                fontSize: 12,
+                color: Color(0xff8A8886),
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ],
         ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../data/utils/app_theme.dart';
 
 class AppNotificationWidget extends StatelessWidget {
   final Widget icon;
@@ -35,7 +34,10 @@ class AppNotificationWidget extends StatelessWidget {
               Expanded(
                 child: Text(
                   text,
-                  style: AppTheme.snackbarTextStyle,
+                  style: const TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ],
