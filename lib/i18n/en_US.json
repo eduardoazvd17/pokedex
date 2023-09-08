@@ -1,1 +1,14 @@
-{}
+{
+    "connection-error": "Unable to communicate with the server, check your connection.",
+    "get-all-pokemons-error": "Could not get pokemon data.",
+    "home-label": "Home",
+    "favorites-label": "Favorites",
+    "profile-label": "Profile",
+    "all-pokemons-list-view-header": "Which Pokémon are you looking for?",
+    "favorites-pokemons-list-view-header": "My favorite Pokemons",
+    "try-again": "Try again",
+    "loading": "Loading...",
+    "empty-favorites": "You haven't favorited any Pokémon yet.",
+    "added-to-favorite": "Pokemon added to favorites",
+    "removed-from-favorite": "Pokémon removed from favorites"
+}

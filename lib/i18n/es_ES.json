@@ -1,1 +1,14 @@
-{}
+{
+    "connection-error": "No se puede comunicar con el servidor, verifique su conexión.",
+    "get-all-pokemons-error": "No se pudieron obtener datos de Pokémon.",
+    "home-label": "Inicio",
+    "favorites-label": "Favoritos",
+    "profile-label": "Perfil",
+    "all-pokemons-list-view-header": "¿Qué Pokémon estás buscando?",
+    "favorites-pokemons-list-view-header": "Mi Pokémon favorito",
+    "try-again": "Inténtalo de nuevo",
+    "loading": "Cargando...",
+    "empty-favorites": "Aún no has marcado ningún Pokémon como favorito.",
+    "added-to-favorite": "Pokemon agregado a favoritos",
+    "removed-from-favorite": "Pokémon eliminado de favoritos"
+}
