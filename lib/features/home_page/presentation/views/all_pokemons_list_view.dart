@@ -34,11 +34,27 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
                   ),
                 ],
               )
-            : ListView(
-                children: [
-                  _headerWidget,
-                  _pokemonsListWidget,
-                ],
+            : NotificationListener<ScrollNotification>(
+                onNotification: (ScrollNotification scrollInfo) {
+                  if (scrollInfo.metrics.pixels >=
+                          (scrollInfo.metrics.maxScrollExtent - 50) &&
+                      !controller.isLoadingMore) {
+                    controller.loadPokemons();
+                  }
+                  return true;
+                },
+                child: ListView(
+                  controller: controller.allPokemonsListController,
+                  children: [
+                    _headerWidget,
+                    _pokemonsListWidget,
+                    if (controller.isLoadingMore)
+                      const Padding(
+                        padding: EdgeInsets.all(25.0),
+                        child: AppLoadingWidget(),
+                      ),
+                  ],
+                ),
               ),
       ),
     );

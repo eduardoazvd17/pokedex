@@ -17,12 +17,18 @@ class HomePageController extends GetxController {
       _currentPage.value =
           HomePageMenu.values[_pageController.page?.round() ?? 0];
     });
-    loadAllPokemons();
+    loadPokemons(reload: true);
     super.onInit();
   }
 
+  final ScrollController _allPokemonsListController = ScrollController();
+  ScrollController get allPokemonsListController => _allPokemonsListController;
+
   final RxBool _isLoading = RxBool(false);
   bool get isLoading => _isLoading.value;
+
+  final RxBool _isLoadingMore = RxBool(false);
+  bool get isLoadingMore => _isLoadingMore.value;
 
   final Rx<AppErrorWidget?> _error = Rx<AppErrorWidget?>(null);
   AppErrorWidget? get error => _error.value;
@@ -42,18 +48,29 @@ class HomePageController extends GetxController {
 
   final RxList<PokemonModel> _allPokemons = RxList<PokemonModel>.empty();
   RxList<PokemonModel> get allPokemons => _allPokemons;
-  Future<void> loadAllPokemons() async {
-    _isLoading.value = true;
+
+  Future<void> loadPokemons({bool reload = false}) async {
+    _isLoading.value = reload || allPokemons.isEmpty;
+    _isLoadingMore.value = !reload && allPokemons.isNotEmpty;
     try {
       _clearError();
-      allPokemons.assignAll(await _service.getAllPokemons());
+      if (reload) {
+        allPokemons.assignAll(
+          await _service.loadPokemons(),
+        );
+      } else {
+        allPokemons.addAll(
+          await _service.loadPokemons(offset: allPokemons.length),
+        );
+      }
     } on AppException catch (exception) {
       _error.value = AppErrorWidget(
         exception: exception,
-        tryAgain: loadAllPokemons,
+        tryAgain: loadPokemons,
       );
     }
     _isLoading.value = false;
+    _isLoadingMore.value = false;
   }
 
   final Rx<HomePageMenu> _currentPage = Rx<HomePageMenu>(HomePageMenu.home);
@@ -71,6 +88,7 @@ class HomePageController extends GetxController {
   @override
   void onClose() {
     _pageController.dispose();
+    _allPokemonsListController.dispose();
     super.onClose();
   }
 }

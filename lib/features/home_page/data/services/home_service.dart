@@ -7,10 +7,13 @@ import 'package:pokedex/features/home_page/data/models/pokemon_model.dart';
 class HomeService extends AppService {
   static const String _endpoint = "https://pokeapi.co/api/v2";
 
-  Future<List<PokemonModel>> getAllPokemons() async {
+  Future<List<PokemonModel>> loadPokemons({
+    int offset = 0,
+    int limit = 20,
+  }) async {
     try {
       final List<PokemonModel> pokemonModels = [];
-      const String url = '$_endpoint/pokemon/?limit=20';
+      final String url = '$_endpoint/pokemon/?limit=$limit&offset=$offset';
       final Map<String, dynamic> response = await get(url: url);
       final pokemonMap = List<Map<String, dynamic>>.from(response['results']);
       for (final Map<String, dynamic> pokemon in pokemonMap) {
