@@ -10,7 +10,10 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const PokemonLogoWidget(),
+        LayoutBuilder(builder: (context, constraints) {
+          if (constraints.maxWidth > 768) return Container();
+          return const PokemonLogoWidget();
+        }),
         Column(
           children: [
             _userAvatarWidget,

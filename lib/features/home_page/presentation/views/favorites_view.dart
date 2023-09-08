@@ -30,7 +30,7 @@ class FavoritesPokemonsListView extends GetWidget<FavoritesViewController> {
                 controller.favorites.isEmpty
             ? Column(
                 children: [
-                  _headerWidget,
+                  _mobileHeaderWidget,
                   Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -51,7 +51,7 @@ class FavoritesPokemonsListView extends GetWidget<FavoritesViewController> {
             : ListView(
                 controller: scrollController,
                 children: [
-                  _headerWidget,
+                  _mobileHeaderWidget,
                   _favoritesPokemonsListWidget,
                 ],
               ),
@@ -59,21 +59,24 @@ class FavoritesPokemonsListView extends GetWidget<FavoritesViewController> {
     );
   }
 
-  Widget get _headerWidget {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const PokemonLogoWidget(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            'favorites-pokemons-list-view-header'.i18n(),
-            style: CustomAppThemes.headerTextStyle,
+  Widget get _mobileHeaderWidget {
+    return LayoutBuilder(builder: (context, constraints) {
+      if (constraints.maxWidth > 768) return Container();
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const PokemonLogoWidget(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              'favorites-pokemons-list-view-header'.i18n(),
+              style: CustomAppThemes.headerTextStyle,
+            ),
           ),
-        ),
-        const SizedBox(height: 20),
-      ],
-    );
+          const SizedBox(height: 20),
+        ],
+      );
+    });
   }
 
   Widget get _favoritesPokemonsListWidget {

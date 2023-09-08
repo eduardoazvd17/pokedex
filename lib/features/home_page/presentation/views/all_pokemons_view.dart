@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/features/home_page/presentation/controllers/all_pokemons_view_controller.dart';
@@ -29,7 +30,7 @@ class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
                 controller.pokemons.isEmpty
             ? Column(
                 children: [
-                  _headerWidget,
+                  _mobileHeaderWidget,
                   Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -54,7 +55,7 @@ class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
                 child: ListView(
                   controller: scrollController,
                   children: [
-                    _headerWidget,
+                    _mobileHeaderWidget,
                     _pokemonsListWidget,
                     if (controller.isLoadingMorePokemons)
                       const Padding(
@@ -68,21 +69,24 @@ class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
     );
   }
 
-  Widget get _headerWidget {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const PokemonLogoWidget(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            'all-pokemons-list-view-header'.i18n(),
-            style: CustomAppThemes.headerTextStyle,
+  Widget get _mobileHeaderWidget {
+    return LayoutBuilder(builder: (context, constraints) {
+      if (constraints.maxWidth > 768) return Container();
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const PokemonLogoWidget(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              'all-pokemons-list-view-header'.i18n(),
+              style: CustomAppThemes.headerTextStyle,
+            ),
           ),
-        ),
-        const SizedBox(height: 20),
-      ],
-    );
+          const SizedBox(height: 20),
+        ],
+      );
+    });
   }
 
   Widget get _pokemonsListWidget {
