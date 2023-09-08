@@ -10,7 +10,7 @@ import '../../data/models/pokemon_model.dart';
 class PokemonCardWidget extends StatelessWidget {
   final PokemonModel pokemonModel;
   final bool isFavorite;
-  final void Function(int) toggleFavorite;
+  final void Function(PokemonModel) toggleFavorite;
   const PokemonCardWidget({
     super.key,
     required this.pokemonModel,
@@ -125,7 +125,7 @@ class PokemonCardWidget extends StatelessWidget {
 
   Widget get _favoriteButton {
     return IconButton(
-      onPressed: () => toggleFavorite.call(pokemonModel.order),
+      onPressed: () => toggleFavorite.call(pokemonModel),
       icon: CustomAppIcons.heart(isSelected: isFavorite, size: 35),
     );
   }

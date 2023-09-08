@@ -14,6 +14,13 @@ class FavoritesPokemonsListView extends GetWidget<HomePageController> {
 
   @override
   Widget build(BuildContext context) {
+    final scrollController = ScrollController(
+      initialScrollOffset: controller.favoritesPokemonsListScrollOffset,
+    );
+    scrollController.addListener(() {
+      controller.favoritesPokemonsListScrollOffset = scrollController.offset;
+    });
+
     return Obx(
       () => Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
@@ -32,7 +39,8 @@ class FavoritesPokemonsListView extends GetWidget<HomePageController> {
                         controller.error ??
                             (controller.favoritesPokemons.isEmpty
                                 ? AppInfoWidget(
-                                    message: 'empty-favorites'.i18n())
+                                    message: 'empty-favorites'.i18n(),
+                                  )
                                 : const AppLoadingWidget()),
                       ],
                     ),
@@ -40,6 +48,7 @@ class FavoritesPokemonsListView extends GetWidget<HomePageController> {
                 ],
               )
             : ListView(
+                controller: scrollController,
                 children: [
                   _headerWidget,
                   _favoritesPokemonsListWidget,
@@ -72,8 +81,7 @@ class FavoritesPokemonsListView extends GetWidget<HomePageController> {
           .map(
             (pokemonModel) => PokemonCardWidget(
               pokemonModel: pokemonModel,
-              isFavorite:
-                  controller.favoritesOrder.contains(pokemonModel.order),
+              isFavorite: controller.favoritesPokemons.contains(pokemonModel),
               toggleFavorite: controller.toggleFavorite,
             ),
           )

@@ -21,8 +21,16 @@ class HomePageController extends GetxController {
     super.onInit();
   }
 
-  final ScrollController _allPokemonsListController = ScrollController();
-  ScrollController get allPokemonsListController => _allPokemonsListController;
+  final RxDouble _allPokemonsListScrollOffset = RxDouble(0);
+  double get allPokemonsListScrollOffset => _allPokemonsListScrollOffset.value;
+  set allPokemonsListScrollOffset(double value) =>
+      _allPokemonsListScrollOffset.value = value;
+
+  final RxDouble _favoritesPokemonsListScrollOffset = RxDouble(0);
+  double get favoritesPokemonsListScrollOffset =>
+      _favoritesPokemonsListScrollOffset.value;
+  set favoritesPokemonsListScrollOffset(double value) =>
+      _favoritesPokemonsListScrollOffset.value = value;
 
   final RxBool _isLoading = RxBool(false);
   bool get isLoading => _isLoading.value;
@@ -34,15 +42,13 @@ class HomePageController extends GetxController {
   AppErrorWidget? get error => _error.value;
   void _clearError() => _error.value = null;
 
-  final RxSet<int> _favorites = RxSet<int>({});
-  RxSet<int> get favoritesOrder => _favorites;
-  List<PokemonModel> get favoritesPokemons =>
-      _allPokemons.where((e) => favoritesOrder.contains(e.order)).toList();
-  void toggleFavorite(int order) {
-    if (favoritesOrder.contains(order)) {
-      favoritesOrder.remove(order);
+  final RxList<PokemonModel> _favoritesPokemons = RxList<PokemonModel>.empty();
+  RxList<PokemonModel> get favoritesPokemons => _favoritesPokemons;
+  void toggleFavorite(PokemonModel model) {
+    if (favoritesPokemons.contains(model)) {
+      favoritesPokemons.remove(model);
     } else {
-      favoritesOrder.add(order);
+      favoritesPokemons.add(model);
     }
   }
 
@@ -88,7 +94,6 @@ class HomePageController extends GetxController {
   @override
   void onClose() {
     _pageController.dispose();
-    _allPokemonsListController.dispose();
     super.onClose();
   }
 }

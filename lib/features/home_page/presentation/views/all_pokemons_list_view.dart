@@ -13,6 +13,13 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
 
   @override
   Widget build(BuildContext context) {
+    final scrollController = ScrollController(
+      initialScrollOffset: controller.allPokemonsListScrollOffset,
+    );
+    scrollController.addListener(() {
+      controller.allPokemonsListScrollOffset = scrollController.offset;
+    });
+
     return Obx(
       () => Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
@@ -44,7 +51,7 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
                   return true;
                 },
                 child: ListView(
-                  controller: controller.allPokemonsListController,
+                  controller: scrollController,
                   children: [
                     _headerWidget,
                     _pokemonsListWidget,
@@ -83,8 +90,7 @@ class AllPokemonsListView extends GetWidget<HomePageController> {
           .map(
             (pokemonModel) => PokemonCardWidget(
               pokemonModel: pokemonModel,
-              isFavorite:
-                  controller.favoritesOrder.contains(pokemonModel.order),
+              isFavorite: controller.favoritesPokemons.contains(pokemonModel),
               toggleFavorite: controller.toggleFavorite,
             ),
           )
