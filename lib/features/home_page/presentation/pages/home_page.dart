@@ -54,23 +54,28 @@ class HomePage extends GetWidget<HomePageController> {
   }
 
   Widget _bottomNavigationBar(BuildContext context) {
-    return Obx(() {
-      return CustomBottomNavigationBar(
-        onChange: controller.changePage,
-        items: HomePageMenu.values.map((item) {
-          final bool isSelected = controller.currentPage == item;
-          return CustomBottomNavigationItem(
-            value: item,
-            icon: item.icon(isSelected: isSelected),
-            label: Text(
-              item.label,
-              style: isSelected
-                  ? CustomAppThemes.menuSelectedTextStyle
-                  : CustomAppThemes.menuNormalTextStyle,
-            ),
-          );
-        }).toList(),
-      );
+    return LayoutBuilder(builder: (context, constraints) {
+      return Obx(() {
+        return Visibility(
+          visible: constraints.maxWidth < 768,
+          child: CustomBottomNavigationBar(
+            onChange: controller.changePage,
+            items: HomePageMenu.values.map((item) {
+              final bool isSelected = controller.currentPage == item;
+              return CustomBottomNavigationItem(
+                value: item,
+                icon: item.icon(isSelected: isSelected),
+                label: Text(
+                  item.label,
+                  style: isSelected
+                      ? CustomAppThemes.menuSelectedTextStyle
+                      : CustomAppThemes.menuNormalTextStyle,
+                ),
+              );
+            }).toList(),
+          ),
+        );
+      });
     });
   }
 }
