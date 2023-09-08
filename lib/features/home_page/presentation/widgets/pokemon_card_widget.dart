@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -78,11 +76,13 @@ class PokemonCardWidget extends StatelessWidget {
                 pokemonModel.formattedOrder,
                 style: CustomAppThemes.bodySmallTextStyle,
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                  pokemonModel.name,
-                  style: CustomAppThemes.headerSmallTextStyle,
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    pokemonModel.name,
+                    style: CustomAppThemes.headerSmallTextStyle,
+                  ),
                 ),
               ),
               Wrap(
