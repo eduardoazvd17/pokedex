@@ -68,20 +68,25 @@ class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
   }
 
   Widget get _responsiveHeaderWidget {
+    final content = Row(
+      children: [
+        Expanded(
+          child: Text(
+            'all-pokemons-list-view-header'.i18n(),
+            style: CustomAppThemes.headerTextStyle,
+          ),
+        ),
+      ],
+    );
+
     return ResponsiveBuilder(
       mobileWidget: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-        child: Text(
-          'all-pokemons-list-view-header'.i18n(),
-          style: CustomAppThemes.headerTextStyle,
-        ),
+        child: content,
       ),
       desktopWidget: Padding(
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 140),
-        child: Text(
-          'all-pokemons-list-view-header'.i18n(),
-          style: CustomAppThemes.headerTextStyle,
-        ),
+        child: content,
       ),
     );
   }
