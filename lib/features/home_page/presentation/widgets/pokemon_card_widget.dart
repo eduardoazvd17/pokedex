@@ -130,15 +130,10 @@ class PokemonCardWidget extends StatelessWidget {
   }
 
   void _displayNotification(BuildContext context, bool isFavorite) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        padding: EdgeInsets.zero,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        content: isFavorite
+    Get.showSnackbar(
+      GetSnackBar(
+        titleText: Container(),
+        messageText: isFavorite
             ? AppNotificationWidget(
                 icon: CustomAppIcons.heart(),
                 text: 'removed-from-favorite'.i18n(),
@@ -147,14 +142,12 @@ class PokemonCardWidget extends StatelessWidget {
                 icon: CustomAppIcons.heart(isSelected: true),
                 text: 'added-to-favorite'.i18n(),
               ),
-        behavior: SnackBarBehavior.floating,
-        duration: const Duration(seconds: 2),
-        margin: EdgeInsets.only(
-          bottom: Get.height - Get.statusBarHeight - 70,
-          left: 80,
-          right: 20,
-        ),
-        dismissDirection: DismissDirection.up,
+        padding: EdgeInsets.zero,
+        borderColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
+        margin: const EdgeInsets.only(top: 40, left: 80, right: 20),
+        duration: const Duration(seconds: 3),
+        snackPosition: SnackPosition.TOP,
       ),
     );
   }
