@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -30,7 +32,7 @@ class PokemonCardWidget extends StatelessWidget {
           SizedBox(
             height: 132,
             child: Card(
-              elevation: 1,
+              elevation: 5,
               color: pokemonModel.types.first.backgroundColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -109,13 +111,17 @@ class PokemonCardWidget extends StatelessWidget {
   }
 
   Widget get _pokeballOverlayImage {
-    return SvgPicture.asset(
-      'assets/images/pokeball-overlay.svg',
-      fit: BoxFit.fitHeight,
-      colorFilter: const ColorFilter.mode(
-        Colors.black38,
-        BlendMode.srcIn,
-      ),
+    return Stack(
+      children: [
+        SvgPicture.asset(
+          'assets/images/pokeball-overlay.svg',
+          fit: BoxFit.fitHeight,
+          colorFilter: const ColorFilter.mode(
+            Colors.black38,
+            BlendMode.srcIn,
+          ),
+        ),
+      ],
     );
   }
 
