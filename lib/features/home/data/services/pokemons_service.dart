@@ -2,9 +2,9 @@ import 'package:hive/hive.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/core/data/exceptions/app_exception.dart';
 import 'package:pokedex/core/data/repository/app_repository.dart';
-import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
-import 'package:pokedex/features/home_page/data/models/adapters/pokemon_model_adapter.dart';
-import 'package:pokedex/features/home_page/data/models/pokemon_model.dart';
+import 'package:pokedex/features/home/data/enums/pokemon_type.dart';
+import 'package:pokedex/features/home/data/models/adapters/pokemon_model_adapter.dart';
+import 'package:pokedex/features/home/data/models/pokemon_model.dart';
 
 class PokemonsService with AppRepository {
   static const String _endpoint = "https://pokeapi.co/api/v2";

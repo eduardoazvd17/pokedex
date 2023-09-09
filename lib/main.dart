@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localization/localization.dart';
-import 'package:pokedex/features/home_page/data/bindings/home_page_binding.dart';
-import 'package:pokedex/features/home_page/presentation/pages/home_page.dart';
+import 'package:pokedex/features/home/data/bindings/home_page_binding.dart';
+import 'package:pokedex/features/home/presentation/pages/home_page.dart';
 import 'package:get/get.dart';
 
 import 'core/data/utils/app_theme.dart';

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pokedex/core/presentation/widgets/app_error_widget.dart';
-import 'package:pokedex/features/home_page/data/models/pokemon_model.dart';
+import 'package:pokedex/features/home/data/models/pokemon_model.dart';
 
 import '../../../../core/data/exceptions/app_exception.dart';
 import '../../data/services/pokemons_service.dart';

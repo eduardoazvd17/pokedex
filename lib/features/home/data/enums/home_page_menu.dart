@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
-import 'package:pokedex/features/home_page/presentation/views/favorites_view.dart';
-import 'package:pokedex/features/home_page/presentation/views/profile_view.dart';
+import 'package:pokedex/features/home/presentation/views/favorites_view.dart';
+import 'package:pokedex/features/home/presentation/views/profile_view.dart';
 
 import '../../../../core/data/utils/app_icons.dart';
-import '../../presentation/views/all_pokemons_view.dart';
+import '../../presentation/views/home_view.dart';
 
 enum HomePageMenu {
   home,
@@ -31,7 +31,7 @@ extension HomePageMenuExtension on HomePageMenu {
 
   Widget get page {
     return switch (this) {
-      HomePageMenu.home => const AllPokemonsView(),
+      HomePageMenu.home => const HomeView(),
       HomePageMenu.favorites => const FavoritesPokemonsListView(),
       HomePageMenu.profile => const ProfileView(),
     };

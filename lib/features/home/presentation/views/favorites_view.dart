@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:pokedex/features/home_page/presentation/controllers/favorites_view_controller.dart';
+import 'package:pokedex/features/home/presentation/controllers/favorites_view_controller.dart';
 
 import '../../../../core/presentation/widgets/app_info_widget.dart';
 import '../../../../core/presentation/widgets/app_loading_widget.dart';

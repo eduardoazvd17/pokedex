@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:pokedex/features/home_page/data/enums/pokemon_type.dart';
-import 'package:pokedex/features/home_page/presentation/widgets/pokemon_type_tag_widget.dart';
+import 'package:pokedex/features/home/data/enums/pokemon_type.dart';
+import 'package:pokedex/features/home/presentation/widgets/pokemon_type_tag_widget.dart';
 
 import '../../../../core/data/utils/app_icons.dart';
 import '../../../../core/presentation/widgets/app_notification_widget.dart';

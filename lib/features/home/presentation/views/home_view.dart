@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/core/presentation/widgets/responsive_builder.dart';
-import 'package:pokedex/features/home_page/presentation/controllers/all_pokemons_view_controller.dart';
-import 'package:pokedex/features/home_page/presentation/widgets/pokemon_card_widget.dart';
+import 'package:pokedex/features/home/presentation/controllers/home_view_controller.dart';
+import 'package:pokedex/features/home/presentation/widgets/pokemon_card_widget.dart';
 
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 
-class AllPokemonsView extends GetWidget<AllPokemonsViewController> {
-  const AllPokemonsView({super.key});
+class HomeView extends GetWidget<HomeViewController> {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
