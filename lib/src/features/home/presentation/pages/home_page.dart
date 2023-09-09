@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex/src/features/home/data/enums/home_page_menu.dart';
-import 'package:pokedex/src/features/home/presentation/widgets/pokemon_logo_widget.dart';
+import 'package:pokedex/src/core/presentation/widgets/pokemon_logo_widget.dart';
 
 import '../../../../core/data/utils/app_icons.dart';
 import '../../../../core/presentation/widgets/custom_bottom_navigation_bar.dart';

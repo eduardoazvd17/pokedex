@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/src/core/presentation/widgets/responsive_builder.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {

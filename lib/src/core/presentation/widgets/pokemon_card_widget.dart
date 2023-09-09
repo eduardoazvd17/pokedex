@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:pokedex/src/features/home/data/enums/pokemon_type.dart';
-import 'package:pokedex/src/features/home/presentation/widgets/pokemon_type_tag_widget.dart';
+import 'package:pokedex/src/core/data/enums/pokemon_type.dart';
+import 'package:pokedex/src/core/presentation/widgets/pokemon_type_tag_widget.dart';
 
-import '../../../../core/data/utils/app_icons.dart';
-import '../../../../core/presentation/widgets/app_notification_widget.dart';
+import '../../data/utils/app_icons.dart';
+import 'app_notification_widget.dart';
 import '../../data/models/pokemon_model.dart';
 
 class PokemonCardWidget extends StatelessWidget {

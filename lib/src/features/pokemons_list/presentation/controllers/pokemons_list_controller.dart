@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
 import 'package:pokedex/src/core/presentation/widgets/app_error_widget.dart';
-import 'package:pokedex/src/features/home/data/models/pokemon_model.dart';
-import 'package:pokedex/src/features/home/presentation/controllers/favorites_view_controller.dart';
+import 'package:pokedex/src/core/data/models/pokemon_model.dart';
+import 'package:pokedex/src/features/favorites_pokemons_list/presentation/controllers/favorites_pokemons_controller.dart';
 
 import '../../../../core/data/exceptions/app_exception.dart';
-import '../../data/services/pokemons_service.dart';
+import '../../../../core/data/services/pokemons_service.dart';
 
-class HomeViewController extends GetxController {
+class PokemonsListController extends GetxController {
   final PokemonsService _service;
-  final FavoritesViewController favoritesViewController;
-  HomeViewController({
+  final FavoritesPokemonsController favoritesViewController;
+  PokemonsListController({
     required PokemonsService service,
     required this.favoritesViewController,
   }) : _service = service;
