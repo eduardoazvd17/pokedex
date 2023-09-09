@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/src/core/presentation/widgets/responsive_builder.dart';
-import 'package:pokedex/src/features/pokemons_list/presentation/controllers/pokemons_list_controller.dart';
+import 'package:pokedex/src/modules/pokemons_list/presentation/controllers/pokemons_list_controller.dart';
 import 'package:pokedex/src/core/presentation/widgets/pokemon_card_widget.dart';
 
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 
-class PokemonsListPage extends GetWidget<PokemonsListController> {
-  const PokemonsListPage({super.key});
+class PokemonsListPage extends StatelessWidget {
+  final PokemonsListController controller;
+  const PokemonsListPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +103,12 @@ class PokemonsListPage extends GetWidget<PokemonsListController> {
       children: controller.pokemons.map((pokemonModel) {
         return PokemonCardWidget(
           pokemonModel: pokemonModel,
-          isFavorite: controller.favoritesViewController.favorites.contains(
+          isFavorite:
+              controller.favoritesPokemonsListController.favorites.contains(
             pokemonModel,
           ),
-          toggleFavorite: controller.favoritesViewController.toggleFavorite,
+          toggleFavorite:
+              controller.favoritesPokemonsListController.toggleFavorite,
         );
       }).toList(),
     );

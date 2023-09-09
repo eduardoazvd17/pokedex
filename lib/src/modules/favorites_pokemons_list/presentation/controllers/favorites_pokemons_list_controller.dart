@@ -5,9 +5,9 @@ import 'package:pokedex/src/core/data/models/pokemon_model.dart';
 import '../../../../core/data/exceptions/app_exception.dart';
 import '../../../../core/data/services/pokemons_service.dart';
 
-class FavoritesPokemonsController extends GetxController {
+class FavoritesPokemonsListController extends GetxController {
   final PokemonsService _service;
-  FavoritesPokemonsController({
+  FavoritesPokemonsListController({
     required PokemonsService service,
   }) : _service = service;
 

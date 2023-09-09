@@ -1,17 +1,17 @@
 import 'package:get/get.dart';
 import 'package:pokedex/src/core/presentation/widgets/app_error_widget.dart';
 import 'package:pokedex/src/core/data/models/pokemon_model.dart';
-import 'package:pokedex/src/features/favorites_pokemons_list/presentation/controllers/favorites_pokemons_controller.dart';
+import 'package:pokedex/src/modules/favorites_pokemons_list/presentation/controllers/favorites_pokemons_list_controller.dart';
 
 import '../../../../core/data/exceptions/app_exception.dart';
 import '../../../../core/data/services/pokemons_service.dart';
 
 class PokemonsListController extends GetxController {
   final PokemonsService _service;
-  final FavoritesPokemonsController favoritesViewController;
+  final FavoritesPokemonsListController favoritesPokemonsListController;
   PokemonsListController({
     required PokemonsService service,
-    required this.favoritesViewController,
+    required this.favoritesPokemonsListController,
   }) : _service = service;
 
   @override

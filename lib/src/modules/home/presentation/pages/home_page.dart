@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokedex/src/features/home/data/enums/home_page_menu.dart';
+import 'package:pokedex/src/modules/home/data/enums/home_page_menu.dart';
 import 'package:pokedex/src/core/presentation/widgets/pokemon_logo_widget.dart';
 
 import '../../../../core/data/utils/app_icons.dart';
@@ -22,12 +22,14 @@ class HomePage extends GetWidget<HomePageController> {
               mobileWidget: _mobileAppBar,
               desktopWidget: _desktopAppBar,
             ),
-            Expanded(
-              child: PageView(
-                controller: controller.pageController,
-                children: HomePageMenu.values.map((e) => e.page).toList(),
-              ),
-            ),
+
+            //TODO: EXIBIR MODULOS DA HOME.
+            // Expanded(
+            //   child: PageView(
+            //     controller: controller.pageController,
+            //     children: HomePageMenu.values.map((e) => e.page).toList(),
+            //   ),
+            // ),
           ],
         ),
       ),
