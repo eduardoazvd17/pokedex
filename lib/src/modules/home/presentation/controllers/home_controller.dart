@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:pokedex/src/modules/home/data/enums/home_page_menu.dart';
 import 'package:simple_overlay/simple_overlay.dart';
 
-class HomePageController extends GetxController {
+class HomeController extends GetxController {
   @override
   void onInit() {
     pageController.addListener(() {

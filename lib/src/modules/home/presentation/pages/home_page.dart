@@ -7,9 +7,9 @@ import '../../../../core/data/utils/app_icons.dart';
 import '../../../../core/presentation/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/presentation/widgets/custom_top_navigation_bar.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
-import '../controllers/home_page_controller.dart';
+import '../controllers/home_controller.dart';
 
-class HomePage extends GetWidget<HomePageController> {
+class HomePage extends GetWidget<HomeController> {
   const HomePage({super.key});
 
   @override
