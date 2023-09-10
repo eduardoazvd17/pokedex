@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Pokedex',
       theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
       localizationsDelegates: _localizationsDelegates,
       supportedLocales: _supportedLocales,
       localeResolutionCallback: _localeResolutionCallback,

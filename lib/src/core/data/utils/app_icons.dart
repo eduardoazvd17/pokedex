@@ -59,6 +59,26 @@ class AppIcons {
     );
   }
 
+  static Widget linkedin({double? size = 32}) {
+    return _svgAsset('assets/icons/linkedin.svg', size: size);
+  }
+
+  static Widget instagram({double? size = 32}) {
+    return _svgAsset('assets/icons/instagram.svg', size: size);
+  }
+
+  static Widget github({double? size = 32}) {
+    return _svgAsset('assets/icons/github.svg', size: size);
+  }
+
+  static Widget notion({double? size = 32}) {
+    return _svgAsset('assets/icons/notion.svg', size: size);
+  }
+
+  static Widget whatsapp({double? size = 32}) {
+    return _svgAsset('assets/icons/whatsapp.svg', size: size);
+  }
+
   static Widget _svgAsset(String asset,
       {bool isSelected = false, double? size}) {
     const ColorFilter selectedFilter = ColorFilter.mode(

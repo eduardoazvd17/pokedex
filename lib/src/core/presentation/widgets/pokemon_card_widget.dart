@@ -167,7 +167,7 @@ class PokemonCardWidget extends StatelessWidget {
           top: (Get.width > 768) ? 180 : 55,
           left: Get.width - ((Get.width > 768) ? 560 : 270),
         ),
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 1),
         snackPosition: SnackPosition.TOP,
       ),
     );
