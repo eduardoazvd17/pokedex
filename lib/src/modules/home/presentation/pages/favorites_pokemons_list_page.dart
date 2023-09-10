@@ -22,58 +22,57 @@ class FavoritesPokemonsListPage extends StatelessWidget {
       controller.scrollOffset = scrollController.offset;
     });
 
-    return Obx(
-      () {
-        if (controller.error != null ||
-            controller.isLoading ||
-            controller.favorites.isEmpty) {
-          return Column(
-            children: [
-              _headerWidget,
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    controller.error ??
-                        (controller.favorites.isEmpty
-                            ? AppInfoWidget(
-                                message: 'empty-favorites'.i18n(),
-                              )
-                            : const AppLoadingWidget()),
-                  ],
-                ),
+    return Obx(() {
+      final Widget content;
+      if (controller.error != null ||
+          controller.isLoading ||
+          controller.favorites.isEmpty) {
+        content = Column(
+          children: [
+            _headerWidget,
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  controller.error ??
+                      (controller.favorites.isEmpty
+                          ? AppInfoWidget(
+                              message: 'empty-favorites'.i18n(),
+                            )
+                          : const AppLoadingWidget()),
+                ],
               ),
-            ],
-          );
-        } else {
-          final Widget content = ListView(
-            controller: scrollController,
-            children: [
-              _headerWidget,
-              _favoritesPokemonsListWidget,
-            ],
-          );
+            ),
+          ],
+        );
+      } else {
+        content = ListView(
+          controller: scrollController,
+          children: [
+            _headerWidget,
+            _favoritesPokemonsListWidget,
+          ],
+        );
+      }
 
-          return ResponsiveBuilder(
-            mobileWidget: Padding(
-              padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
-              child: content,
-            ),
-            desktopWidget: Padding(
-              padding: const EdgeInsets.only(
-                top: 35,
-                left: 124,
-                right: 124,
-                bottom: 10,
-              ),
-              child: content,
-            ),
-          );
-        }
-      },
-    );
+      return ResponsiveBuilder(
+        mobileWidget: Padding(
+          padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
+          child: content,
+        ),
+        desktopWidget: Padding(
+          padding: const EdgeInsets.only(
+            top: 35,
+            left: 124,
+            right: 124,
+            bottom: 10,
+          ),
+          child: content,
+        ),
+      );
+    });
   }
 
   Widget get _headerWidget {

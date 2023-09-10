@@ -22,10 +22,11 @@ class PokemonsListPage extends StatelessWidget {
     });
 
     return Obx(() {
+      final Widget content;
       if (controller.error != null ||
           controller.isLoading ||
           controller.pokemons.isEmpty) {
-        return Column(
+        content = Column(
           children: [
             _headerWidget,
             Expanded(
@@ -41,7 +42,7 @@ class PokemonsListPage extends StatelessWidget {
           ],
         );
       } else {
-        final Widget content = NotificationListener<ScrollNotification>(
+        content = NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo) {
             if (scrollInfo.metrics.pixels >=
                     (scrollInfo.metrics.maxScrollExtent - 50) &&
@@ -63,23 +64,23 @@ class PokemonsListPage extends StatelessWidget {
             ],
           ),
         );
-
-        return ResponsiveBuilder(
-          mobileWidget: Padding(
-            padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
-            child: content,
-          ),
-          desktopWidget: Padding(
-            padding: const EdgeInsets.only(
-              top: 35,
-              left: 124,
-              right: 124,
-              bottom: 10,
-            ),
-            child: content,
-          ),
-        );
       }
+
+      return ResponsiveBuilder(
+        mobileWidget: Padding(
+          padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
+          child: content,
+        ),
+        desktopWidget: Padding(
+          padding: const EdgeInsets.only(
+            top: 35,
+            left: 124,
+            right: 124,
+            bottom: 10,
+          ),
+          child: content,
+        ),
+      );
     });
   }
 
