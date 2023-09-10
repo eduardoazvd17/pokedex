@@ -10,5 +10,7 @@
     "loading": "Loading...",
     "empty-favorites": "You haven't favorited any Pokémon yet.",
     "added-to-favorite": "Pokemon added to favorites",
-    "removed-from-favorite": "Pokémon removed from favorites"
+    "removed-from-favorite": "Pokémon removed from favorites",
+    "follow-button": "Follow",
+    "message-button": "Message"
 }
