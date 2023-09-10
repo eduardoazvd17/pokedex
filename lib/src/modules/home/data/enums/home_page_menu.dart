@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
-import 'package:pokedex/src/modules/home/presentation/pages/favorites_pokemons_list_page.dart';
-import 'package:pokedex/src/modules/home/presentation/pages/pokemons_list_page.dart';
-import 'package:pokedex/src/modules/home/presentation/pages/profile_page.dart';
 
 import '../../../../core/data/utils/app_icons.dart';
 
@@ -26,14 +23,6 @@ extension HomePageMenuExtension on HomePageMenu {
       HomePageMenu.home => AppIcons.home(isSelected: isSelected),
       HomePageMenu.favorites => AppIcons.favorites(isSelected: isSelected),
       HomePageMenu.profile => AppIcons.profile(isSelected: isSelected),
-    };
-  }
-
-  Widget get page {
-    return switch (this) {
-      HomePageMenu.home => const PokemonsListPage(),
-      HomePageMenu.favorites => const FavoritesPokemonsListPage(),
-      HomePageMenu.profile => const ProfilePage(),
     };
   }
 }

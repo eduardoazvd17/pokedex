@@ -1,37 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/get.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:localization/localization.dart';
 
 import 'src/core/data/utils/app_theme.dart';
-import 'src/modules/home/data/bindings/home_binding.dart';
-import 'src/modules/home/presentation/pages/home_page.dart';
+import 'src/modules/app_module.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocalJsonLocalization.delegate.directories = ['lib/i18n'];
   await Hive.initFlutter();
-  runApp(const MyApp());
+  runApp(ModularApp(module: AppModule(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp.router(
       title: 'Pokedex',
       theme: AppTheme.lightTheme,
       localizationsDelegates: _localizationsDelegates,
       supportedLocales: _supportedLocales,
       localeResolutionCallback: _localeResolutionCallback,
-      getPages: [
-        GetPage(
-          name: '/',
-          page: () => const HomePage(),
-          binding: HomeBinding(),
-        ),
-      ],
+      routerConfig: Modular.routerConfig,
     );
   }
 

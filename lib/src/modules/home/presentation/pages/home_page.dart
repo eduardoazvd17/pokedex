@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide RouterOutlet;
 import 'package:pokedex/src/modules/home/data/enums/home_page_menu.dart';
 import 'package:pokedex/src/core/presentation/widgets/pokemon_logo_widget.dart';
+import 'package:pokedex/src/modules/home/presentation/controllers/pokemons_list_controller.dart';
+import 'package:pokedex/src/modules/home/presentation/pages/pokemons_list_page.dart';
+import 'package:pokedex/src/modules/home/presentation/pages/profile_page.dart';
 
 import '../../../../core/data/utils/app_icons.dart';
 import '../../../../core/presentation/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/presentation/widgets/custom_top_navigation_bar.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
+import '../controllers/favorites_pokemons_list_controller.dart';
 import '../controllers/home_controller.dart';
+import 'favorites_pokemons_list_page.dart';
 
-class HomePage extends GetWidget<HomeController> {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
+  final HomeController controller;
+  const HomePage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +31,18 @@ class HomePage extends GetWidget<HomeController> {
             Expanded(
               child: PageView(
                 controller: controller.pageController,
-                children: HomePageMenu.values.map((e) => e.page).toList(),
+                children: HomePageMenu.values
+                    .map((e) => switch (e) {
+                          HomePageMenu.home => PokemonsListPage(
+                              controller: Get.find<PokemonsListController>(),
+                            ),
+                          HomePageMenu.favorites => FavoritesPokemonsListPage(
+                              controller:
+                                  Get.find<FavoritesPokemonsListController>(),
+                            ),
+                          HomePageMenu.profile => const ProfilePage(),
+                        })
+                    .toList(),
               ),
             ),
           ],

@@ -7,8 +7,9 @@ import 'package:pokedex/src/core/presentation/widgets/pokemon_card_widget.dart';
 
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 
-class PokemonsListPage extends GetWidget<PokemonsListController> {
-  const PokemonsListPage({super.key});
+class PokemonsListPage extends StatelessWidget {
+  final PokemonsListController controller;
+  const PokemonsListPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

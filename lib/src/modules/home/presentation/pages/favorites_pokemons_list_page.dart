@@ -8,9 +8,9 @@ import '../../../../core/presentation/widgets/app_loading_widget.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../../../core/presentation/widgets/pokemon_card_widget.dart';
 
-class FavoritesPokemonsListPage
-    extends GetWidget<FavoritesPokemonsListController> {
-  const FavoritesPokemonsListPage({super.key});
+class FavoritesPokemonsListPage extends StatelessWidget {
+  final FavoritesPokemonsListController controller;
+  const FavoritesPokemonsListPage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
