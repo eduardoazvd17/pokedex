@@ -26,7 +26,7 @@ class PokemonsListPage extends GetWidget<PokemonsListController> {
           controller.pokemons.isEmpty) {
         return Column(
           children: [
-            _responsiveHeaderWidget,
+            _headerWidget,
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -40,7 +40,7 @@ class PokemonsListPage extends GetWidget<PokemonsListController> {
           ],
         );
       } else {
-        return NotificationListener<ScrollNotification>(
+        final Widget content = NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo) {
             if (scrollInfo.metrics.pixels >=
                     (scrollInfo.metrics.maxScrollExtent - 50) &&
@@ -52,7 +52,7 @@ class PokemonsListPage extends GetWidget<PokemonsListController> {
           child: ListView(
             controller: scrollController,
             children: [
-              _responsiveHeaderWidget,
+              _headerWidget,
               _pokemonsListWidget,
               if (controller.isLoadingMorePokemons)
                 const Padding(
@@ -62,33 +62,41 @@ class PokemonsListPage extends GetWidget<PokemonsListController> {
             ],
           ),
         );
+
+        return ResponsiveBuilder(
+          mobileWidget: Padding(
+            padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
+            child: content,
+          ),
+          desktopWidget: Padding(
+            padding: const EdgeInsets.only(
+              top: 35,
+              left: 124,
+              right: 124,
+              bottom: 10,
+            ),
+            child: content,
+          ),
+        );
       }
     });
   }
 
-  Widget get _responsiveHeaderWidget {
-    final content = Row(
-      children: [
-        Expanded(
-          child: Text(
-            'all-pokemons-list-view-header'.i18n(),
-            style: const TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.w600,
+  Widget get _headerWidget {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              'all-pokemons-list-view-header'.i18n(),
+              style: const TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
-        ),
-      ],
-    );
-
-    return ResponsiveBuilder(
-      mobileWidget: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-        child: content,
-      ),
-      desktopWidget: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 140),
-        child: content,
+        ],
       ),
     );
   }
