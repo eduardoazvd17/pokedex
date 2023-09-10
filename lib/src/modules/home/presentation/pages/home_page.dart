@@ -61,81 +61,100 @@ class HomePage extends StatelessWidget {
   }
 
   Widget get _mobileAppBar {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 28, right: 28, bottom: 20),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 50.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: AppIcons.settings(),
+    return Stack(
+      children: [
+        Padding(
+          padding:
+              const EdgeInsets.only(top: 15, left: 28, right: 28, bottom: 20),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 50.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: AppIcons.settings(),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: AppIcons.notification(),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: AppIcons.notification(),
-                ),
-              ],
-            ),
+              ),
+              const Positioned(bottom: 10, child: PokemonLogoWidget()),
+            ],
           ),
-          const Positioned(bottom: 10, child: PokemonLogoWidget()),
-        ],
-      ),
+        ),
+        Positioned(
+            bottom: 30,
+            right: 28,
+            child: Obx(() => controller.notification ?? Container())),
+      ],
     );
   }
 
   Widget get _desktopAppBar {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 35,
-        left: 124,
-        right: 124,
-        bottom: 35,
-      ),
-      child: Column(
-        children: [
-          const PokemonLogoWidget(),
-          const SizedBox(height: 35),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 35,
+            left: 124,
+            right: 124,
+            bottom: 35,
+          ),
+          child: Column(
             children: [
-              Expanded(
-                child: Obx(
-                  () => CustomTopNavigationBar(
-                    onChange: controller.changePage,
-                    items: HomePageMenu.values.map((item) {
-                      final bool isSelected = controller.currentPage == item;
-                      return CustomTopNavigationItem(
-                        value: item,
-                        isSelected: isSelected,
-                        icon: item.icon(isSelected: isSelected),
-                        label: item.label,
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
+              const PokemonLogoWidget(),
+              const SizedBox(height: 35),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: AppIcons.notification(),
+                  Expanded(
+                    child: Obx(
+                      () => CustomTopNavigationBar(
+                        onChange: controller.changePage,
+                        items: HomePageMenu.values.map((item) {
+                          final bool isSelected =
+                              controller.currentPage == item;
+                          return CustomTopNavigationItem(
+                            value: item,
+                            isSelected: isSelected,
+                            icon: item.icon(isSelected: isSelected),
+                            label: item.label,
+                          );
+                        }).toList(),
+                      ),
+                    ),
                   ),
-                  const SizedBox(width: 20),
-                  IconButton(
-                    onPressed: () {},
-                    icon: AppIcons.settings(),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: AppIcons.notification(),
+                      ),
+                      const SizedBox(width: 20),
+                      IconButton(
+                        onPressed: () {},
+                        icon: AppIcons.settings(),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ],
           ),
-        ],
-      ),
+        ),
+        Positioned(
+          bottom: 5,
+          right: 185,
+          child: Obx(() => controller.notification ?? Container()),
+        ),
+      ],
     );
   }
 

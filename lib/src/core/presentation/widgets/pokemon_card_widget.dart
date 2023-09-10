@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:localization/localization.dart';
 import 'package:pokedex/src/core/data/enums/pokemon_type.dart';
 import 'package:pokedex/src/core/presentation/widgets/pokemon_type_tag_widget.dart';
+import 'package:pokedex/src/modules/home/presentation/controllers/home_controller.dart';
 
 import '../../data/utils/app_icons.dart';
 import '../../data/models/pokemon_model.dart';
+import 'app_notification_widget.dart';
 
 class PokemonCardWidget extends StatelessWidget {
   final PokemonModel pokemonModel;
@@ -52,7 +55,7 @@ class PokemonCardWidget extends StatelessWidget {
             right: 0,
             child: _pokemonContentWidget,
           ),
-          Positioned(top: 16, right: 16, child: _favoriteButton(context)),
+          Positioned(top: 16, right: 16, child: _favoriteButton),
         ],
       ),
     );
@@ -131,10 +134,10 @@ class PokemonCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _favoriteButton(BuildContext context) {
+  Widget get _favoriteButton {
     return IconButton(
       onPressed: () {
-        _displayNotification(context, isFavorite);
+        _displayNotification(isFavorite);
         toggleFavorite.call(pokemonModel);
       },
       icon: AppIcons.heart(isSelected: isFavorite, size: 35)
@@ -144,34 +147,18 @@ class PokemonCardWidget extends StatelessWidget {
     );
   }
 
-  Future<void> _displayNotification(
-    BuildContext context,
-    bool isFavorite,
-  ) async {
-    // await Get.closeCurrentSnackbar();
-    // Get.showSnackbar(
-    //   GetSnackBar(
-    //     maxWidth: 207,
-    //     titleText: Container(),
-    //     messageText: isFavorite
-    //         ? AppNotificationWidget(
-    //             icon: AppIcons.heart(),
-    //             text: 'removed-from-favorite'.i18n(),
-    //           )
-    //         : AppNotificationWidget(
-    //             icon: AppIcons.heart(isSelected: true),
-    //             text: 'added-to-favorite'.i18n(),
-    //           ),
-    //     padding: EdgeInsets.zero,
-    //     borderColor: Colors.transparent,
-    //     backgroundColor: Colors.transparent,
-    //     margin: EdgeInsets.only(
-    //       top: (Get.width > 768) ? 180 : 55,
-    //       left: Get.width - ((Get.width > 768) ? 560 : 270),
-    //     ),
-    //     duration: const Duration(seconds: 1),
-    //     snackPosition: SnackPosition.TOP,
-    //   ),
-    // );
+  Future<void> _displayNotification(bool isFavorite) async {
+    if (Get.isRegistered<HomeController>()) {
+      final AppNotificationWidget notification = isFavorite
+          ? AppNotificationWidget(
+              icon: AppIcons.heart(),
+              text: 'removed-from-favorite'.i18n(),
+            )
+          : AppNotificationWidget(
+              icon: AppIcons.heart(isSelected: true),
+              text: 'added-to-favorite'.i18n(),
+            );
+      Get.find<HomeController>().showNotification(notification);
+    }
   }
 }

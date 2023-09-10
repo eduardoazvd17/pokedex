@@ -8,18 +8,17 @@ class PokemonModelAdapter extends TypeAdapter<PokemonModel> {
 
   @override
   PokemonModel read(BinaryReader reader) {
-    final int order = reader.readInt();
-    final String name = reader.readString();
-    final List<PokemonType> types = reader.readList().map((e) {
-      return PokemonTypeExtension.fromName(e as String);
-    }).toList();
-    final String imageUrl = reader.readString();
-
     return PokemonModel(
-      order: order,
-      name: name,
-      types: types,
-      imageUrl: imageUrl,
+      order: reader.readInt(),
+      name: reader.readString(),
+      types: reader.readList().map((e) {
+        return PokemonTypeExtension.fromName(e as String);
+      }).toList(),
+      imageUrl: reader.readString(),
+      height: reader.readDouble(),
+      weight: reader.readDouble(),
+      gender: reader.readString(),
+      abilities: List<String>.from(reader.readList()),
     );
   }
 
@@ -29,5 +28,9 @@ class PokemonModelAdapter extends TypeAdapter<PokemonModel> {
     writer.writeString(obj.name);
     writer.writeList(obj.types.map((e) => e.name).toList());
     writer.writeString(obj.imageUrl);
+    writer.writeDouble(obj.height);
+    writer.writeDouble(obj.weight);
+    writer.writeString(obj.gender);
+    writer.writeList(obj.abilities);
   }
 }

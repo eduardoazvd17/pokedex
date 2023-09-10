@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pokedex/src/modules/home/data/enums/home_page_menu.dart';
-import 'package:simple_overlay/simple_overlay.dart';
+import '../../../../core/presentation/widgets/app_notification_widget.dart';
 
 class HomeController extends GetxController {
   @override
@@ -25,10 +25,26 @@ class HomeController extends GetxController {
     );
   }
 
-  final SimpleOverlayController _notificationBarController =
-      SimpleOverlayController();
-  SimpleOverlayController get notificationBarController =>
-      _notificationBarController;
+  final Rx<DateTime?> _lastNotification = Rx<DateTime?>(null);
+  final Rx<AppNotificationWidget?> _notification =
+      Rx<AppNotificationWidget?>(null);
+  AppNotificationWidget? get notification => _notification.value;
+
+  Future<void> showNotification(AppNotificationWidget notification) async {
+    _notification.value = null;
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    final dateTime = DateTime.now();
+    _notification.value = notification;
+    _lastNotification.value = dateTime;
+
+    Future.delayed(const Duration(seconds: 3)).then((_) {
+      if (_lastNotification.value != null &&
+          dateTime.isAtSameMomentAs(_lastNotification.value!)) {
+        _notification.value = null;
+      }
+    });
+  }
 
   @override
   void onClose() {
