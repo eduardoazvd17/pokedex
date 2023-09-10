@@ -14,22 +14,56 @@ class FavoritesPokemonsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollController = ScrollController(
-      initialScrollOffset: controller.scrollOffset,
+    final Widget content = Column(
+      children: [
+        _headerWidget,
+        Expanded(child: _pageContent),
+      ],
     );
 
-    scrollController.addListener(() {
-      controller.scrollOffset = scrollController.offset;
-    });
+    return ResponsiveBuilder(
+      mobileWidget: Padding(
+        padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
+        child: content,
+      ),
+      desktopWidget: Padding(
+        padding: const EdgeInsets.only(
+          top: 35,
+          left: 124,
+          right: 124,
+          bottom: 10,
+        ),
+        child: content,
+      ),
+    );
+  }
 
+  Widget get _headerWidget {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 50),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              'favorites-pokemons-list-view-header'.i18n(),
+              style: const TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget get _pageContent {
     return Obx(() {
-      final Widget content;
       if (controller.error != null ||
           controller.isLoading ||
           controller.favorites.isEmpty) {
-        content = Column(
+        return Column(
           children: [
-            _headerWidget,
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -48,50 +82,22 @@ class FavoritesPokemonsListPage extends StatelessWidget {
           ],
         );
       } else {
-        content = ListView(
+        final scrollController = ScrollController(
+          initialScrollOffset: controller.scrollOffset,
+        );
+
+        scrollController.addListener(() {
+          controller.scrollOffset = scrollController.offset;
+        });
+
+        return ListView(
           controller: scrollController,
           children: [
-            _headerWidget,
             _favoritesPokemonsListWidget,
           ],
         );
       }
-
-      return ResponsiveBuilder(
-        mobileWidget: Padding(
-          padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
-          child: content,
-        ),
-        desktopWidget: Padding(
-          padding: const EdgeInsets.only(
-            top: 35,
-            left: 124,
-            right: 124,
-            bottom: 10,
-          ),
-          child: content,
-        ),
-      );
     });
-  }
-
-  Widget get _headerWidget {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              'favorites-pokemons-list-view-header'.i18n(),
-              style: const TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Widget get _favoritesPokemonsListWidget {

@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
 
   Widget get _mobileAppBar {
     return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
+      padding: const EdgeInsets.only(top: 15, left: 28, right: 28, bottom: 20),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
         top: 35,
         left: 124,
         right: 124,
-        bottom: 10,
+        bottom: 35,
       ),
       child: Column(
         children: [

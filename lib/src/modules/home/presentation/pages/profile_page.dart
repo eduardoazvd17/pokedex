@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
 
   Widget get _mobileWidget {
     return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
+      padding: const EdgeInsets.only(left: 28, right: 28),
       child: Column(
         children: [
           Padding(
@@ -59,7 +59,6 @@ class ProfilePage extends StatelessWidget {
   Widget get _desktopWidget {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 35,
         left: 124,
         right: 124,
         bottom: 10,

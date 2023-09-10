@@ -13,80 +13,33 @@ class PokemonsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollController = ScrollController(
-      initialScrollOffset: controller.scrollOffset,
+    final Widget content = Column(
+      children: [
+        _headerWidget,
+        Expanded(child: _pageContent),
+      ],
     );
 
-    scrollController.addListener(() {
-      controller.scrollOffset = scrollController.offset;
-    });
-
-    return Obx(() {
-      final Widget content;
-      if (controller.error != null ||
-          controller.isLoading ||
-          controller.pokemons.isEmpty) {
-        content = Column(
-          children: [
-            _headerWidget,
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  controller.error ?? const AppLoadingWidget(),
-                ],
-              ),
-            ),
-          ],
-        );
-      } else {
-        content = NotificationListener<ScrollNotification>(
-          onNotification: (ScrollNotification scrollInfo) {
-            if (scrollInfo.metrics.pixels >=
-                    (scrollInfo.metrics.maxScrollExtent - 50) &&
-                !controller.isLoadingMorePokemons) {
-              controller.loadPokemons();
-            }
-            return true;
-          },
-          child: ListView(
-            controller: scrollController,
-            children: [
-              _headerWidget,
-              _pokemonsListWidget,
-              if (controller.isLoadingMorePokemons)
-                const Padding(
-                  padding: EdgeInsets.all(25.0),
-                  child: AppLoadingWidget(),
-                ),
-            ],
-          ),
-        );
-      }
-
-      return ResponsiveBuilder(
-        mobileWidget: Padding(
-          padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
-          child: content,
+    return ResponsiveBuilder(
+      mobileWidget: Padding(
+        padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
+        child: content,
+      ),
+      desktopWidget: Padding(
+        padding: const EdgeInsets.only(
+          top: 35,
+          left: 124,
+          right: 124,
+          bottom: 10,
         ),
-        desktopWidget: Padding(
-          padding: const EdgeInsets.only(
-            top: 35,
-            left: 124,
-            right: 124,
-            bottom: 10,
-          ),
-          child: content,
-        ),
-      );
-    });
+        child: content,
+      ),
+    );
   }
 
   Widget get _headerWidget {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 50),
       child: Row(
         children: [
           Expanded(
@@ -100,6 +53,61 @@ class PokemonsListPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget get _pageContent {
+    return Obx(
+      () {
+        if (controller.error != null ||
+            controller.isLoading ||
+            controller.pokemons.isEmpty) {
+          return Column(
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    controller.error ?? const AppLoadingWidget(),
+                  ],
+                ),
+              ),
+            ],
+          );
+        } else {
+          final scrollController = ScrollController(
+            initialScrollOffset: controller.scrollOffset,
+          );
+
+          scrollController.addListener(() {
+            controller.scrollOffset = scrollController.offset;
+          });
+
+          return NotificationListener<ScrollNotification>(
+            onNotification: (ScrollNotification scrollInfo) {
+              if (scrollInfo.metrics.pixels >=
+                      (scrollInfo.metrics.maxScrollExtent - 50) &&
+                  !controller.isLoadingMorePokemons) {
+                controller.loadPokemons();
+              }
+              return true;
+            },
+            child: ListView(
+              controller: scrollController,
+              children: [
+                _pokemonsListWidget,
+                if (controller.isLoadingMorePokemons)
+                  const Padding(
+                    padding: EdgeInsets.all(25.0),
+                    child: AppLoadingWidget(),
+                  ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 
