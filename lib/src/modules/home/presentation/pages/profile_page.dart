@@ -8,46 +8,91 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Column(
-          children: [
-            _responsiveHeaderWidget,
-            const Text(
-              'Eduardo Azevedo',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const Text(
-              'Software Egineer',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                color: Color(0xff8A8886),
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ],
+        ResponsiveBuilder(
+          mobileWidget: _mobileWidget,
+          desktopWidget: _desktopWidget,
         ),
       ],
     );
   }
 
-  Widget get _responsiveHeaderWidget {
-    return ResponsiveBuilder(
-      mobileWidget: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-        child: _userAvatarWidget,
-      ),
-      desktopWidget: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 140),
-        child: _userAvatarWidget,
+  Widget get _mobileWidget {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15, left: 28, right: 28),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: _profilePictureWidget,
+          ),
+          const Text(
+            'Eduardo Azevedo',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const Text(
+            'Software Egineer',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 12,
+              color: Color(0xff8A8886),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget get _userAvatarWidget {
+  Widget get _desktopWidget {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 35,
+        left: 124,
+        right: 124,
+        bottom: 10,
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 40),
+                    child: _profilePictureWidget,
+                  ),
+                  const Text(
+                    'Eduardo Azevedo',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const Text(
+                    'Software Egineer',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xff8A8886),
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget get _profilePictureWidget {
     const double size = 124;
     return Stack(
       alignment: Alignment.center,
