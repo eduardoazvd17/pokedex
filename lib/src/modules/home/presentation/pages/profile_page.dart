@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/src/core/presentation/widgets/responsive_builder.dart';
 
@@ -264,6 +265,6 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ).animate().flipH();
   }
 }
