@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/src/core/presentation/widgets/responsive_builder.dart';
-import 'package:pokedex/src/modules/pokemons_list/presentation/controllers/pokemons_list_controller.dart';
+import 'package:pokedex/src/modules/home/presentation/controllers/pokemons_list_controller.dart';
 import 'package:pokedex/src/core/presentation/widgets/pokemon_card_widget.dart';
 
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 
-class PokemonsListPage extends StatelessWidget {
-  final PokemonsListController controller;
-  const PokemonsListPage({super.key, required this.controller});
+class PokemonsListPage extends GetWidget<PokemonsListController> {
+  const PokemonsListPage({super.key});
 
   @override
   Widget build(BuildContext context) {

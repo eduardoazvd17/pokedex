@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,7 +12,7 @@ class AppTheme {
           surfaceTint: Colors.white,
           brightness: Brightness.light,
         ),
-        fontFamily: GoogleFonts.roboto().fontFamily,
+        fontFamily: Platform.isMacOS ? null : GoogleFonts.roboto().fontFamily,
         useMaterial3: true,
       );
 
@@ -23,7 +25,7 @@ class AppTheme {
         surfaceTint: Colors.black,
         brightness: Brightness.dark,
       ),
-      fontFamily: GoogleFonts.roboto().fontFamily,
+      fontFamily: Platform.isMacOS ? null : GoogleFonts.roboto().fontFamily,
       useMaterial3: true,
       textTheme: const TextTheme(displayLarge: TextStyle()));
 }

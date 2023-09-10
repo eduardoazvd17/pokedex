@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide RouterOutlet;
 import 'package:pokedex/src/modules/home/data/enums/home_page_menu.dart';
 import 'package:pokedex/src/core/presentation/widgets/pokemon_logo_widget.dart';
 
@@ -9,9 +9,8 @@ import '../../../../core/presentation/widgets/custom_top_navigation_bar.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../controllers/home_page_controller.dart';
 
-class HomePage extends StatelessWidget {
-  final HomePageController controller;
-  const HomePage({super.key, required this.controller});
+class HomePage extends GetWidget<HomePageController> {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +22,12 @@ class HomePage extends StatelessWidget {
               mobileWidget: _mobileAppBar,
               desktopWidget: _desktopAppBar,
             ),
-
-            //TODO: EXIBIR MODULOS DA HOME.
-            // Expanded(
-            //   child: PageView(
-            //     controller: controller.pageController,
-            //     children: HomePageMenu.values.map((e) => e.page).toList(),
-            //   ),
-            // ),
+            Expanded(
+              child: PageView(
+                controller: controller.pageController,
+                children: HomePageMenu.values.map((e) => e.page).toList(),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pokedex/src/core/presentation/widgets/app_error_widget.dart';
 import 'package:pokedex/src/core/data/models/pokemon_model.dart';
-import 'package:pokedex/src/modules/favorites_pokemons_list/presentation/controllers/favorites_pokemons_list_controller.dart';
+import 'package:pokedex/src/modules/home/presentation/controllers/favorites_pokemons_list_controller.dart';
 
 import '../../../../core/data/exceptions/app_exception.dart';
 import '../../../../core/data/services/pokemons_service.dart';

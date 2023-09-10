@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:pokedex/src/modules/favorites_pokemons_list/presentation/controllers/favorites_pokemons_list_controller.dart';
+import 'package:pokedex/src/modules/home/presentation/controllers/favorites_pokemons_list_controller.dart';
 
 import '../../../../core/presentation/widgets/app_info_widget.dart';
 import '../../../../core/presentation/widgets/app_loading_widget.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../../../core/presentation/widgets/pokemon_card_widget.dart';
 
-class FavoritesPokemonsListPage extends StatelessWidget {
-  final FavoritesPokemonsListController controller;
-  const FavoritesPokemonsListPage({super.key, required this.controller});
+class FavoritesPokemonsListPage
+    extends GetWidget<FavoritesPokemonsListController> {
+  const FavoritesPokemonsListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
