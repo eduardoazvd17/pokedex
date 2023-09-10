@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
@@ -89,7 +90,7 @@ class PokemonCardWidget extends StatelessWidget {
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
                     ),
-                  ),
+                  ).animate().slideX().fade(),
                 ),
               ),
               Wrap(
@@ -114,7 +115,7 @@ class PokemonCardWidget extends StatelessWidget {
     return Image.network(
       pokemonModel.imageUrl,
       height: 132,
-    );
+    ).animate().flipH();
   }
 
   Widget get _pokeballOverlayImage {
@@ -138,7 +139,10 @@ class PokemonCardWidget extends StatelessWidget {
         _displayNotification(context, isFavorite);
         toggleFavorite.call(pokemonModel);
       },
-      icon: AppIcons.heart(isSelected: isFavorite, size: 35),
+      icon: AppIcons.heart(isSelected: isFavorite, size: 35)
+          .animate()
+          .slideY()
+          .fade(),
     );
   }
 
