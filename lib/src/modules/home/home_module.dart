@@ -21,7 +21,10 @@ class HomeModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(Modular.initialRoute, child: (_) => const HomePage());
+    r.child(
+      Modular.initialRoute,
+      child: (_) => HomePage(controller: Modular.get<HomePageController>()),
+    );
     r.module('/home', module: PokemonsListModule());
     r.module('/favorites', module: FavoritesPokemonsListModule());
     r.module('/profile', module: ProfileModule());

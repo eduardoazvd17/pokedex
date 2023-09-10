@@ -9,8 +9,9 @@ import '../../../../core/presentation/widgets/custom_top_navigation_bar.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../controllers/home_page_controller.dart';
 
-class HomePage extends GetWidget<HomePageController> {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
+  final HomePageController controller;
+  const HomePage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
