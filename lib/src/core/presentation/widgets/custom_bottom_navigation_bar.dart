@@ -14,21 +14,27 @@ class CustomBottomNavigationBar<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 20,
-        top: 10,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: items.map((item) {
-          return InkWell(
-            borderRadius: BorderRadius.circular(15),
-            onTap: () => onChange.call(item.value),
-            child: item.toWidget(),
-          );
-        }).toList(),
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Divider(height: 0),
+        Padding(
+          padding: const EdgeInsets.only(
+            bottom: 20,
+            top: 20,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: items.map((item) {
+              return InkWell(
+                borderRadius: BorderRadius.circular(15),
+                onTap: () => onChange.call(item.value),
+                child: item.toWidget(),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
     );
   }
 }
