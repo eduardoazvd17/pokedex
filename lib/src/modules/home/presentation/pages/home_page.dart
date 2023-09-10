@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart' hide RouterOutlet;
 import 'package:pokedex/src/modules/home/data/enums/home_page_menu.dart';
 import 'package:pokedex/src/core/presentation/widgets/pokemon_logo_widget.dart';
@@ -21,32 +22,39 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            ResponsiveBuilder(
-              mobileWidget: _mobileAppBar,
-              desktopWidget: _desktopAppBar,
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                ResponsiveBuilder(
+                  mobileWidget: _mobileAppBar,
+                  desktopWidget: _desktopAppBar,
+                ),
+                Expanded(
+                  child: PageView(
+                    controller: controller.pageController,
+                    children: HomePageMenu.values
+                        .map((e) => switch (e) {
+                              HomePageMenu.home => PokemonsListPage(
+                                  controller:
+                                      Get.find<PokemonsListController>(),
+                                ),
+                              HomePageMenu.favorites =>
+                                FavoritesPokemonsListPage(
+                                  controller: Get.find<
+                                      FavoritesPokemonsListController>(),
+                                ),
+                              HomePageMenu.profile => const ProfilePage(),
+                            })
+                        .toList(),
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: PageView(
-                controller: controller.pageController,
-                children: HomePageMenu.values
-                    .map((e) => switch (e) {
-                          HomePageMenu.home => PokemonsListPage(
-                              controller: Get.find<PokemonsListController>(),
-                            ),
-                          HomePageMenu.favorites => FavoritesPokemonsListPage(
-                              controller:
-                                  Get.find<FavoritesPokemonsListController>(),
-                            ),
-                          HomePageMenu.profile => const ProfilePage(),
-                        })
-                    .toList(),
-              ),
-            ),
-          ],
-        ),
+          ),
+          const RouterOutlet(),
+        ],
       ),
       bottomNavigationBar: _bottomNavigationBar(context),
     );

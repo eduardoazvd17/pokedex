@@ -21,45 +21,39 @@ class PokemonCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Modular.to.navigate('/details');
-      },
-      borderRadius: BorderRadius.circular(30),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 382),
-        child: Stack(
-          children: [
-            SizedBox(
-              height: 132,
-              child: Card(
-                elevation: 5,
-                color: pokemonModel.types.first.backgroundColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      bottom: -10,
-                      child: _pokeballOverlayImage,
-                    ),
-                  ],
-                ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 382),
+      child: Stack(
+        children: [
+          SizedBox(
+            height: 132,
+            child: Card(
+              elevation: 5,
+              color: pokemonModel.types.first.backgroundColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    bottom: -10,
+                    child: _pokeballOverlayImage,
+                  ),
+                ],
               ),
             ),
-            Positioned(
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: _pokemonContentWidget,
-            ),
-            Positioned(top: 16, right: 16, child: _favoriteButton(context)),
-          ],
-        ),
+          ),
+          Positioned(
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: _pokemonContentWidget,
+          ),
+          Positioned(top: 16, right: 16, child: _favoriteButton(context)),
+        ],
       ),
     );
   }
