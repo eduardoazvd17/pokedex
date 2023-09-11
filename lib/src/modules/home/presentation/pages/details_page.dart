@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/src/core/data/enums/pokemon_type.dart';
@@ -60,27 +61,84 @@ class DetailsPage extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          ClipPath(
-                            clipper: CustomBorderClipper(),
-                            child: Container(
-                              height: 200,
-                              decoration: BoxDecoration(
-                                gradient: RadialGradient(
-                                  radius: 4,
-                                  focal: Alignment.center,
-                                  colors: [
-                                    pokemonModel.types.first.backgroundColor,
-                                    Colors.black,
-                                  ],
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Container(
+                                width: 30,
+                                height: 130,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      pokemonModel.types.first.backgroundColor,
+                                      Colors.black,
+                                    ],
+                                    stops: const [-0.6, 2.5],
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                  ),
                                 ),
                               ),
-                            ),
+                              Expanded(
+                                child: ClipPath(
+                                  clipper: CustomBorderClipper(),
+                                  child: Container(
+                                    height: 210,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          pokemonModel
+                                              .types.first.backgroundColor,
+                                          Colors.black,
+                                        ],
+                                        stops: const [0, 2],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 30,
+                                height: 210,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      pokemonModel.types.first.backgroundColor,
+                                      Colors.black,
+                                    ],
+                                    stops: const [0, 2],
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topRight: Radius.circular(30),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           Obx(() => _pageTabs),
                         ],
                       ),
                       Positioned(
-                        bottom: 55,
+                        left: 0,
+                        bottom: 85,
+                        child: SvgPicture.asset(
+                          'assets/images/pokeball-overlay.svg',
+                          fit: BoxFit.fitHeight,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.black,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 60,
                         left: 0,
                         right: 0,
                         child: Row(
@@ -136,8 +194,8 @@ class DetailsPage extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        top: 25,
-                        right: 15,
+                        top: 20,
+                        right: 10,
                         child: Obx(
                           () => IconButton(
                             onPressed: () {
