@@ -132,7 +132,7 @@ class DetailsPage extends StatelessWidget {
                           'assets/images/pokeball-overlay.svg',
                           fit: BoxFit.fitHeight,
                           colorFilter: const ColorFilter.mode(
-                            Colors.black,
+                            Colors.black38,
                             BlendMode.srcIn,
                           ),
                         ),
