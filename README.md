@@ -53,3 +53,10 @@ A aplicação foi desenvolvida utilizando flutter e adotando padrões de código
     <img src="./screenshots/desktop/fav_add.png"/>
     <img src="./screenshots/desktop/fav_remove.png"/>
 </div>
+
+#### Detalhes
+<div align="center">
+    <img src="./screenshots/desktop/about.png"/>
+    <img src="./screenshots/desktop/stats.png"/>
+    <img src="./screenshots/desktop/moves.png" />
+</div>
