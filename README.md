@@ -14,7 +14,8 @@ A aplicação foi desenvolvida utilizando flutter e adotando padrões de código
     -   Detalhes do pokemon (about, stats, moves).
 
 ## Capturas de Tela
-### Home
+### Mobile
+#### Home
 <div align="center">
 	<img width="200" height="400" src="./screenshots/mobile/home.png"/>
     <span style="padding-left:5px"></span>
@@ -23,18 +24,32 @@ A aplicação foi desenvolvida utilizando flutter e adotando padrões de código
     <img width="200" height="400" src="./screenshots/mobile/profile.png" />
 </div>
 
-### Notificações
+#### Notificações
 <div align="center">
     <img width="200" src="./screenshots/mobile/fav_add.png"/>
     <span style="padding-left:5px"></span>
     <img width="200" src="./screenshots/mobile/fav_remove.png"/>
 </div>
 
-### Detalhes
+#### Detalhes
 <div align="center">
     <img width="200" height="400" src="./screenshots/mobile/about.png"/>
     <span style="padding-left:5px"></span>
     <img width="200" height="400" src="./screenshots/mobile/stats.png"/>
     <span style="padding-left:5px"></span>
     <img width="200" height="400" src="./screenshots/mobile/moves.png" />
+</div>
+
+### Desktop
+#### Home
+<div align="center">
+	<img src="./screenshots/desktop/home.png"/>
+    <img src="./screenshots/desktop/favorites.png"/>
+    <img src="./screenshots/desktop/profile.png" />
+</div>
+
+#### Notificações
+<div align="center">
+    <img src="./screenshots/desktop/fav_add.png"/>
+    <img src="./screenshots/desktop/fav_remove.png"/>
 </div>
