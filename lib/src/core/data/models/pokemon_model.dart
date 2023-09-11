@@ -6,18 +6,22 @@ import '../enums/pokemon_type.dart';
 @HiveType(typeId: 1)
 class PokemonModel extends Equatable {
   @HiveField(0)
-  final int order;
+  final String id;
 
   @HiveField(1)
-  final String name;
+  final int order;
 
   @HiveField(2)
-  final List<PokemonType> types;
+  final String name;
 
   @HiveField(3)
+  final List<PokemonType> types;
+
+  @HiveField(4)
   final String imageUrl;
 
   const PokemonModel({
+    required this.id,
     required this.order,
     required this.name,
     required this.types,
@@ -36,6 +40,7 @@ class PokemonModel extends Equatable {
         .toList();
 
     return PokemonModel(
+      id: '${map['id']}',
       order: map['order'],
       name: name.replaceFirst(name[0], name[0].toUpperCase()),
       types: types,

@@ -9,20 +9,22 @@ class PokemonModelAdapter extends TypeAdapter<PokemonModel> {
   @override
   PokemonModel read(BinaryReader reader) {
     return PokemonModel(
-      order: reader.readInt(),
-      name: reader.readString(),
-      types: reader.readList().map((e) {
-        return PokemonTypeExtension.fromName(e as String);
+      id: reader.read(),
+      order: reader.read(),
+      name: reader.read(),
+      types: List<String>.from(reader.read()).map((e) {
+        return PokemonTypeExtension.fromName(e);
       }).toList(),
-      imageUrl: reader.readString(),
+      imageUrl: reader.read(),
     );
   }
 
   @override
   void write(BinaryWriter writer, PokemonModel obj) {
-    writer.writeInt(obj.order);
-    writer.writeString(obj.name);
-    writer.writeList(obj.types.map((e) => e.name).toList());
-    writer.writeString(obj.imageUrl);
+    writer.write(obj.id);
+    writer.write(obj.order);
+    writer.write(obj.name);
+    writer.write(obj.types.map((e) => e.name).toList());
+    writer.write(obj.imageUrl);
   }
 }

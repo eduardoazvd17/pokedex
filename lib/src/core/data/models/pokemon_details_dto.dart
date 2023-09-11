@@ -10,6 +10,8 @@ class PokemonDetailsDTO {
   final List<PokemonType> weakenes;
   final List<PokemonType> strengths;
 
+  final Iterable<Map<String, dynamic>> stats;
+
   PokemonDetailsDTO({
     required this.model,
     required this.height,
@@ -18,5 +20,6 @@ class PokemonDetailsDTO {
     required this.abilities,
     required this.weakenes,
     required this.strengths,
+    required this.stats,
   });
 }

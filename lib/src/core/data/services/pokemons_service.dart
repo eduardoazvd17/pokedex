@@ -36,13 +36,11 @@ class PokemonsService with AppRepository {
 
   Future<PokemonDetailsDTO> loadDetails(PokemonModel model) async {
     try {
-      final dataMap =
-          await get(url: '$_endpoint/pokemon/${model.name.toLowerCase()}');
+      final dataMap = await get(url: '$_endpoint/pokemon/${model.id}');
 
       late String gender;
       try {
-        final genderMap =
-            await get(url: '$_endpoint/gender/${model.name.toLowerCase()}');
+        final genderMap = await get(url: '$_endpoint/gender/${model.id}');
         gender = genderMap['name'].replaceFirst(
           genderMap['name'][0],
           genderMap['name'][0].toUpperCase(),
@@ -52,21 +50,37 @@ class PokemonsService with AppRepository {
       }
 
       return PokemonDetailsDTO(
-        model: model,
-        height: '${dataMap['height'] / 10}m',
-        weight: '${dataMap['weight'] / 10}kg',
-        gender: gender,
-        abilities: dataMap['abilities']
-            .map((e) {
-              final String name = e['ability']['name'];
-              return name.replaceFirst(name[0], name[0].toUpperCase());
-            })
-            .toString()
-            .replaceAll('(', '')
-            .replaceAll(')', ''),
-        weakenes: [],
-        strengths: [],
-      );
+          model: model,
+          height: '${dataMap['height'] / 10}m',
+          weight: '${dataMap['weight'] / 10}kg',
+          gender: gender,
+          abilities: dataMap['abilities']
+              .map((e) {
+                final String name = e['ability']['name'];
+                return name.replaceFirst(name[0], name[0].toUpperCase());
+              })
+              .toString()
+              .replaceAll('(', '')
+              .replaceAll(')', ''),
+          weakenes: [],
+          strengths: [],
+          stats: (dataMap['stats'] as List).map((e) {
+            String label = e['stat']['name'].toString();
+            if (label == 'hp') {
+              label = label.toUpperCase();
+            } else if (label.contains('special-')) {
+              label = label
+                  .replaceAll('special-attack', 'Sp. Atk')
+                  .replaceAll('special-defense', 'Sp. Def');
+            } else {
+              label = label.replaceFirst(label[0], label[0].toUpperCase());
+            }
+
+            return {
+              "label": label,
+              "value": e['base_stat'],
+            };
+          }));
     } on AppException catch (_) {
       rethrow;
     } catch (error) {

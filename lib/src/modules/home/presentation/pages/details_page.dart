@@ -298,12 +298,104 @@ class DetailsPage extends StatelessWidget {
 
           return switch (controller.currentPage) {
             DetailsPageMenu.about => _aboutTabContent.animate().fade(),
+            DetailsPageMenu.stats => _statsTabContent.animate().fade(),
             _ => Container(),
           };
         },
       ),
     );
   }
+
+  Widget get _statsTabContent => Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ...controller.details!.stats.map(
+                (e) => Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: Text(
+                    e['label'],
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xff555252),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(6.0),
+                child: Text(
+                  'Total',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Color(0xff555252),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ...controller.details!.stats.map(
+                  (e) {
+                    final int value = e['value'];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            value.toString(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Color(0xff555252),
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Container(
+                            width: (value * 2).toDouble(),
+                            height: 9,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Color(
+                                e['label'] == 'Speed' ? 0xff0804B4 : 0xffF10A34,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        controller.details!.stats
+                            .map((e) => e['value'] as int)
+                            .reduce((a, b) => a + b)
+                            .toString(),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xff555252),
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      );
 
   Widget get _aboutTabContent => Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -342,7 +434,9 @@ class DetailsPage extends StatelessWidget {
                         Text(
                           controller.details!.height,
                           style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ],
                     ),

@@ -39,7 +39,7 @@ class DetailsController extends GetxController {
 
   open(BuildContext context, PokemonModel pokemonModel) {
     changePage(DetailsPageMenu.about);
-    loadDetails(pokemonModel);
+    _loadDetails(pokemonModel);
     showDialog(
       context: context,
       useSafeArea: false,
@@ -50,7 +50,7 @@ class DetailsController extends GetxController {
     );
   }
 
-  Future<void> loadDetails(PokemonModel pokemonModel) async {
+  Future<void> _loadDetails(PokemonModel pokemonModel) async {
     _isLoading.value = true;
     _error.value = null;
     try {
@@ -58,7 +58,7 @@ class DetailsController extends GetxController {
     } on AppException catch (exception) {
       _error.value = AppErrorWidget(
         exception: exception,
-        tryAgain: () => loadDetails(pokemonModel),
+        tryAgain: () => _loadDetails(pokemonModel),
       );
     }
     _isLoading.value = false;
