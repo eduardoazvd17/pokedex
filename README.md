@@ -16,25 +16,25 @@ A aplicação foi desenvolvida utilizando flutter e adotando padrões de código
 ## Capturas de Tela
 ### Home
 <div align="center">
-	<img width="200" height="400" src="./screenshots/home.png"/>
+	<img width="200" height="400" src="./screenshots/mobile/home.png"/>
     <span style="padding-left:5px"></span>
-    <img width="200" height="400" src="./screenshots/favorites.png"/>
+    <img width="200" height="400" src="./screenshots/mobile/favorites.png"/>
     <span style="padding-left:5px"></span>
-    <img width="200" height="400" src="./screenshots/profile.png" />
+    <img width="200" height="400" src="./screenshots/mobile/profile.png" />
 </div>
 
 ### Notificações
 <div align="center">
-    <img width="200" src="./screenshots/fav_add.png"/>
+    <img width="200" src="./screenshots/mobile/fav_add.png"/>
     <span style="padding-left:5px"></span>
-    <img width="200" src="./screenshots/fav_remove.png"/>
+    <img width="200" src="./screenshots/mobile/fav_remove.png"/>
 </div>
 
 ### Detalhes
 <div align="center">
-    <img width="200" height="400" src="./screenshots/about.png"/>
+    <img width="200" height="400" src="./screenshots/mobile/about.png"/>
     <span style="padding-left:5px"></span>
-    <img width="200" height="400" src="./screenshots/stats.png"/>
+    <img width="200" height="400" src="./screenshots/mobile/stats.png"/>
     <span style="padding-left:5px"></span>
-    <img width="200" height="400" src="./screenshots/moves.png" />
+    <img width="200" height="400" src="./screenshots/mobile/moves.png" />
 </div>
