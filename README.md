@@ -1,6 +1,6 @@
 # Pokedex
 
-Um app desenvolvido com flutter. Desafio proposto pela empresa Guarani Sistemas.
+Um app de Pokémon desenvolvido com flutter. Desafio proposto pela empresa Guarani Sistemas.
 
 ## Tecnologias Utilizadas
 
