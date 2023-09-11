@@ -56,6 +56,7 @@ class DetailsPage extends StatelessWidget {
                 maxHeight: 624,
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Stack(
                     children: [
@@ -119,7 +120,7 @@ class DetailsPage extends StatelessWidget {
                 pokemonModel.types.first.backgroundColor,
                 Colors.black,
               ],
-              stops: const [-0.6, 2.5],
+              stops: const [-0.5, 2.5],
             ),
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -289,7 +290,7 @@ class DetailsPage extends StatelessWidget {
 
   Widget get _selectedTabContentWidget {
     return Padding(
-      padding: const EdgeInsets.only(left: 64, right: 64),
+      padding: const EdgeInsets.only(left: 64, right: 64, top: 20),
       child: Obx(
         () {
           if (controller.isLoading || controller.error != null) {
@@ -400,16 +401,21 @@ class DetailsPage extends StatelessWidget {
 
   Widget get _movesTabContent => Column(
         children: controller.details!.moves
-            .map((e) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0, top: 18),
-                      child: Text(e),
-                    ),
-                    const Divider(height: 0, color: Color(0xffDEDEDE)),
-                  ],
-                ))
+            .map(
+              (e) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0, top: 18),
+                    child: Text(e),
+                  ),
+                  const Divider(
+                    height: 0,
+                    color: Color(0xffDEDEDE),
+                  ),
+                ],
+              ),
+            )
             .toList(),
       );
 
