@@ -34,15 +34,15 @@ class DetailsPage extends StatelessWidget {
           color: Colors.transparent,
           child: Padding(
             padding: const EdgeInsets.only(bottom: 108.0),
-            child: _content,
+            child: _detailsPagecontent,
           ),
         ),
-        desktopWidget: _content,
+        desktopWidget: _detailsPagecontent,
       ),
     );
   }
 
-  Widget get _content {
+  Widget get _detailsPagecontent {
     return Material(
       color: Colors.black87,
       child: GestureDetector(
@@ -61,154 +61,26 @@ class DetailsPage extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: 30,
-                                height: 130,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      pokemonModel.types.first.backgroundColor,
-                                      Colors.black,
-                                    ],
-                                    stops: const [-0.6, 2.5],
-                                  ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: ClipPath(
-                                  clipper: CustomBorderClipper(),
-                                  child: Container(
-                                    height: 210,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                          pokemonModel
-                                              .types.first.backgroundColor,
-                                          Colors.black,
-                                        ],
-                                        stops: const [0, 2],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: 30,
-                                height: 210,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      pokemonModel.types.first.backgroundColor,
-                                      Colors.black,
-                                    ],
-                                    stops: const [0, 2],
-                                  ),
-                                  borderRadius: const BorderRadius.only(
-                                    topRight: Radius.circular(30),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Obx(() => _pageTabs),
+                          _topBackgroundWidget,
+                          Obx(() => _pageTabsMenuWidget),
                         ],
                       ),
                       Positioned(
                         left: 0,
                         bottom: 85,
-                        child: SvgPicture.asset(
-                          'assets/images/pokeball-overlay.svg',
-                          fit: BoxFit.fitHeight,
-                          colorFilter: const ColorFilter.mode(
-                            Colors.black38,
-                            BlendMode.srcIn,
-                          ),
-                        ),
+                        child: _pokeballOverlayWidget,
                       ),
                       Positioned(
                         bottom: 60,
                         left: 0,
                         right: 0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16),
-                              child: Transform.flip(
-                                flipX: true,
-                                child: Image.network(
-                                  pokemonModel.imageUrl,
-                                  height: 216,
-                                  width: 204,
-                                ),
-                              ).animate().slideX(),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    pokemonModel.formattedOrder,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 5),
-                                    child: Text(
-                                      pokemonModel.name,
-                                      style: const TextStyle(
-                                        fontSize: 28,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  Wrap(
-                                    spacing: 5,
-                                    runSpacing: 5,
-                                    children: pokemonModel.types
-                                        .map((e) => PokemonTypeTagWidget(
-                                            pokemonType: e))
-                                        .toList(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                        child: _pokemonModelWidget,
                       ),
                       Positioned(
                         top: 20,
                         right: 10,
                         child: Obx(
-                          () => IconButton(
-                            onPressed: () {
-                              _displayNotification(
-                                  controller.isFavorite(pokemonModel));
-                              controller.favoritesPokemonsListController
-                                  .toggleFavorite(pokemonModel);
-                            },
-                            icon: AppIcons.heart(
-                              isSelected: controller.isFavorite(pokemonModel),
-                              size: 35,
-                            ).animate().slideY().fade(),
-                          ),
+                          () => _favoriteButtonWidget,
                         ),
                       ),
                     ],
@@ -218,7 +90,7 @@ class DetailsPage extends StatelessWidget {
                       color: const Color(0xffF7F7F7),
                       child: ListView(
                         children: [
-                          _selectedTabContent,
+                          _selectedTabContentWidget,
                         ],
                       ),
                     ),
@@ -232,7 +104,147 @@ class DetailsPage extends StatelessWidget {
     );
   }
 
-  Widget get _pageTabs {
+  Widget get _topBackgroundWidget {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Container(
+          width: 30,
+          height: 130,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                pokemonModel.types.first.backgroundColor,
+                Colors.black,
+              ],
+              stops: const [-0.6, 2.5],
+            ),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+            ),
+          ),
+        ),
+        Expanded(
+          child: ClipPath(
+            clipper: CustomBorderClipper(),
+            child: Container(
+              height: 210,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    pokemonModel.types.first.backgroundColor,
+                    Colors.black,
+                  ],
+                  stops: const [0, 2],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          width: 30,
+          height: 210,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                pokemonModel.types.first.backgroundColor,
+                Colors.black,
+              ],
+              stops: const [0, 2],
+            ),
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(30),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget get _pokeballOverlayWidget {
+    return SvgPicture.asset(
+      'assets/images/pokeball-overlay.svg',
+      fit: BoxFit.fitHeight,
+      colorFilter: const ColorFilter.mode(
+        Colors.black38,
+        BlendMode.srcIn,
+      ),
+    );
+  }
+
+  Widget get _pokemonModelWidget {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: Transform.flip(
+            flipX: true,
+            child: Image.network(
+              pokemonModel.imageUrl,
+              height: 216,
+              width: 204,
+            ),
+          ).animate().slideX(),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                pokemonModel.formattedOrder,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Text(
+                  pokemonModel.name,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              Wrap(
+                spacing: 5,
+                runSpacing: 5,
+                children: pokemonModel.types
+                    .map((e) => PokemonTypeTagWidget(pokemonType: e))
+                    .toList(),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget get _favoriteButtonWidget {
+    return IconButton(
+      onPressed: () {
+        _displayNotification(controller.isFavorite(pokemonModel));
+        controller.favoritesPokemonsListController.toggleFavorite(pokemonModel);
+      },
+      icon: AppIcons.heart(
+        isSelected: controller.isFavorite(pokemonModel),
+        size: 35,
+      ).animate().slideY().fade(),
+    );
+  }
+
+  Widget get _pageTabsMenuWidget {
     return Container(
       color: Colors.white,
       child: Padding(
@@ -275,7 +287,7 @@ class DetailsPage extends StatelessWidget {
     );
   }
 
-  Widget get _selectedTabContent {
+  Widget get _selectedTabContentWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 64, right: 64),
       child: Obx(
