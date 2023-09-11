@@ -15,6 +15,7 @@ class AppTheme {
         fontFamily: !kIsWeb && Platform.isMacOS
             ? null
             : GoogleFonts.roboto().fontFamily,
+        dividerColor: const Color(0xffDEDEDE),
         useMaterial3: true,
       );
 }

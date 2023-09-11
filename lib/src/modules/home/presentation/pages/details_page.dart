@@ -299,7 +299,8 @@ class DetailsPage extends StatelessWidget {
           return switch (controller.currentPage) {
             DetailsPageMenu.about => _aboutTabContent.animate().fade(),
             DetailsPageMenu.stats => _statsTabContent.animate().fade(),
-            _ => Container(),
+            DetailsPageMenu.moves => _movesTabContent.animate().fade(),
+            _ => const Text('Coming soon...'),
           };
         },
       ),
@@ -397,13 +398,28 @@ class DetailsPage extends StatelessWidget {
         ],
       );
 
+  Widget get _movesTabContent => Column(
+        children: controller.details!.moves
+            .map((e) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0, top: 18),
+                      child: Text(e),
+                    ),
+                    const Divider(height: 0, color: Color(0xffDEDEDE)),
+                  ],
+                ))
+            .toList(),
+      );
+
   Widget get _aboutTabContent => Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Semper viverra nam libero justo. Sed id semper risus in hendrerit.',
-            style: TextStyle(
+          Text(
+            controller.details!.flavorText,
+            style: const TextStyle(
               fontSize: 12,
               color: Color(0xff555252),
               fontWeight: FontWeight.w400,
@@ -524,7 +540,7 @@ class DetailsPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text('...'),
+                          Text(controller.details!.category),
                         ],
                       ),
                     ),

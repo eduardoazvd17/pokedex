@@ -17,7 +17,7 @@ class CustomBottomNavigationBar<T> extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Divider(height: 0),
+        const Divider(height: 0, color: Color(0xffDEDEDE)),
         Padding(
           padding: const EdgeInsets.only(
             bottom: 20,

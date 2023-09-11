@@ -51,6 +51,7 @@ class DetailsController extends GetxController {
   }
 
   Future<void> _loadDetails(PokemonModel pokemonModel) async {
+    if (details != null && details?.model.id == pokemonModel.id) return;
     _isLoading.value = true;
     _error.value = null;
     try {

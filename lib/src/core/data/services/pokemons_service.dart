@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/src/core/data/exceptions/app_exception.dart';
@@ -7,7 +8,7 @@ import 'package:pokedex/src/core/data/models/adapters/pokemon_model_adapter.dart
 import 'package:pokedex/src/core/data/models/pokemon_model.dart';
 
 class PokemonsService with AppRepository {
-  static const String _endpoint = "https://pokeapi.co/api/v2";
+  static const String _endpoint = 'https://pokeapi.co/api/v2';
   static const String _favoritesBoxKey = 'favoritesBox';
 
   Future<List<PokemonModel>> loadPokemons({
@@ -49,38 +50,69 @@ class PokemonsService with AppRepository {
         gender = 'Genderless';
       }
 
-      return PokemonDetailsDTO(
-          model: model,
-          height: '${dataMap['height'] / 10}m',
-          weight: '${dataMap['weight'] / 10}kg',
-          gender: gender,
-          abilities: dataMap['abilities']
-              .map((e) {
-                final String name = e['ability']['name'];
-                return name.replaceFirst(name[0], name[0].toUpperCase());
-              })
-              .toString()
-              .replaceAll('(', '')
-              .replaceAll(')', ''),
-          weakenes: [],
-          strengths: [],
-          stats: (dataMap['stats'] as List).map((e) {
-            String label = e['stat']['name'].toString();
-            if (label == 'hp') {
-              label = label.toUpperCase();
-            } else if (label.contains('special-')) {
-              label = label
-                  .replaceAll('special-attack', 'Sp. Atk')
-                  .replaceAll('special-defense', 'Sp. Def');
-            } else {
-              label = label.replaceFirst(label[0], label[0].toUpperCase());
-            }
+      final specieMap =
+          await get(url: '$_endpoint/pokemon-species/${model.id}');
 
-            return {
-              "label": label,
-              "value": e['base_stat'],
-            };
-          }));
+      final String category = specieMap['genera']
+          .firstWhere((e) => e['language']['name'] == 'en')['genus']
+          .replaceAll('Pokémon', '');
+
+      final String flavorText =
+          List<Map<String, dynamic>>.from(specieMap['flavor_text_entries'])
+                  .firstWhereOrNull((e) {
+                return e['version']['name'] == 'firered' &&
+                    e['language']['name'] == 'en';
+              })?['flavor_text'] ??
+              specieMap['flavor_text_entries'][0]['flavor_text'];
+
+      final List<String> moves =
+          List<Map<String, dynamic>>.from(dataMap['moves']).map((e) {
+        String name = e['move']['name'].toString();
+
+        String formattedName = '';
+        for (final String part in name.split('-')) {
+          formattedName +=
+              '${part.replaceFirst(part[0], part[0].toUpperCase())} ';
+        }
+        return formattedName.trim();
+      }).toList();
+
+      return PokemonDetailsDTO(
+        model: model,
+        flavorText: flavorText,
+        height: '${dataMap['height'] / 10}m',
+        weight: '${dataMap['weight'] / 10}kg',
+        gender: gender,
+        abilities: dataMap['abilities']
+            .map((e) {
+              final String name = e['ability']['name'];
+              return name.replaceFirst(name[0], name[0].toUpperCase());
+            })
+            .toString()
+            .replaceAll('(', '')
+            .replaceAll(')', ''),
+        weakenes: [],
+        strengths: [],
+        stats: (dataMap['stats'] as List).map((e) {
+          String label = e['stat']['name'].toString();
+          if (label == 'hp') {
+            label = label.toUpperCase();
+          } else if (label.contains('special-')) {
+            label = label
+                .replaceAll('special-attack', 'Sp. Atk')
+                .replaceAll('special-defense', 'Sp. Def');
+          } else {
+            label = label.replaceFirst(label[0], label[0].toUpperCase());
+          }
+
+          return {
+            'label': label,
+            'value': e['base_stat'],
+          };
+        }),
+        category: category,
+        moves: moves,
+      );
     } on AppException catch (_) {
       rethrow;
     } catch (error) {
