@@ -36,11 +36,13 @@ class PokemonsService with AppRepository {
 
   Future<PokemonDetailsDTO> loadDetails(PokemonModel model) async {
     try {
-      final dataMap = await get(url: '$_endpoint/pokemon/${model.order}');
+      final dataMap =
+          await get(url: '$_endpoint/pokemon/${model.name.toLowerCase()}');
 
       late String gender;
       try {
-        final genderMap = await get(url: '$_endpoint/gender/${model.order}');
+        final genderMap =
+            await get(url: '$_endpoint/gender/${model.name.toLowerCase()}');
         gender = genderMap['name'].replaceFirst(
           genderMap['name'][0],
           genderMap['name'][0].toUpperCase(),
