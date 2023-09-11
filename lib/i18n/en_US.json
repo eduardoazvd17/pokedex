@@ -12,5 +12,16 @@
     "added-to-favorite": "Pokemon added to favorites",
     "removed-from-favorite": "Pokémon removed from favorites",
     "follow-button": "Follow",
-    "message-button": "Message"
+    "message-button": "Message",
+    "about-text": "About",
+    "stats-text": "Status",
+    "evolution-text": "Evolution",
+    "moves-text": "Moves",
+    "weight-text": "Weight",
+    "height-text": "Height",
+    "gender-text": "Gender",
+    "abilities-text": "Abilities",
+    "category-text": "Category",
+    "weakenes-text": "Weakness",
+    "strength-text": "Strength"
 }
