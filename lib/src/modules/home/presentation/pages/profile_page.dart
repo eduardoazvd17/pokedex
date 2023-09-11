@@ -117,9 +117,10 @@ class ProfilePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 24, bottom: 11),
-            child: Text('Sobre mim', style: TextStyle(fontSize: 14)),
+          Padding(
+            padding: const EdgeInsets.only(top: 24, bottom: 11),
+            child:
+                Text('about-me'.i18n(), style: const TextStyle(fontSize: 14)),
           ),
           Container(
             decoration: BoxDecoration(
@@ -137,9 +138,10 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 20, bottom: 11),
-            child: Text('Sobre o projeto', style: TextStyle(fontSize: 14)),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 11),
+            child: Text('about-project'.i18n(),
+                style: const TextStyle(fontSize: 14)),
           ),
           Container(
             decoration: BoxDecoration(
