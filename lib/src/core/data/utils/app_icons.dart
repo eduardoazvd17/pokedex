@@ -79,6 +79,18 @@ class AppIcons {
     return _svgAsset('assets/icons/whatsapp.svg', size: size);
   }
 
+  static Widget height({double? size = 16}) {
+    return _svgAsset('assets/icons/height.svg', size: size);
+  }
+
+  static Widget weight({double? size = 16}) {
+    return _svgAsset('assets/icons/weight.svg', size: size);
+  }
+
+  static Widget gender({double? size = 16}) {
+    return _svgAsset('assets/icons/gender.svg', size: size);
+  }
+
   static Widget _svgAsset(String asset,
       {bool isSelected = false, double? size}) {
     const ColorFilter selectedFilter = ColorFilter.mode(

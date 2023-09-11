@@ -116,7 +116,7 @@ class PokemonsListPage extends StatelessWidget {
       alignment: WrapAlignment.center,
       runAlignment: WrapAlignment.center,
       spacing: 5,
-      runSpacing: 15,
+      runSpacing: 5,
       children: controller.pokemons.map((pokemonModel) {
         return PokemonCardWidget(
           pokemonModel: pokemonModel,

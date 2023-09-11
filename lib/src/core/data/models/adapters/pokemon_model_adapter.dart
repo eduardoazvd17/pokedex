@@ -15,10 +15,6 @@ class PokemonModelAdapter extends TypeAdapter<PokemonModel> {
         return PokemonTypeExtension.fromName(e as String);
       }).toList(),
       imageUrl: reader.readString(),
-      height: reader.readDouble(),
-      weight: reader.readDouble(),
-      gender: reader.readString(),
-      abilities: List<String>.from(reader.readList()),
     );
   }
 
@@ -28,9 +24,5 @@ class PokemonModelAdapter extends TypeAdapter<PokemonModel> {
     writer.writeString(obj.name);
     writer.writeList(obj.types.map((e) => e.name).toList());
     writer.writeString(obj.imageUrl);
-    writer.writeDouble(obj.height);
-    writer.writeDouble(obj.weight);
-    writer.writeString(obj.gender);
-    writer.writeList(obj.abilities);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokedex/src/modules/home/presentation/controllers/details_controller.dart';
 
 import '../../../../core/data/services/pokemons_service.dart';
 import '../../presentation/controllers/favorites_pokemons_list_controller.dart';
@@ -13,6 +14,13 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => FavoritesPokemonsListController(service: service));
     Get.lazyPut(
       () => PokemonsListController(
+        service: service,
+        favoritesPokemonsListController:
+            Get.find<FavoritesPokemonsListController>(),
+      ),
+    );
+    Get.lazyPut(
+      () => DetailsController(
         service: service,
         favoritesPokemonsListController:
             Get.find<FavoritesPokemonsListController>(),

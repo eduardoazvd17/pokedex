@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/src/core/data/enums/pokemon_type.dart';
 import 'package:pokedex/src/core/presentation/widgets/pokemon_type_tag_widget.dart';
+import 'package:pokedex/src/modules/home/presentation/controllers/details_controller.dart';
 import 'package:pokedex/src/modules/home/presentation/controllers/home_controller.dart';
 
 import '../../data/utils/app_icons.dart';
@@ -24,39 +25,46 @@ class PokemonCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 382),
-      child: Stack(
-        children: [
-          SizedBox(
-            height: 132,
-            child: Card(
-              elevation: 5,
-              color: pokemonModel.types.first.backgroundColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    bottom: -10,
-                    child: _pokeballOverlayImage,
-                  ),
-                ],
+    return GestureDetector(
+      onTap: () {
+        if (Get.isRegistered<DetailsController>()) {
+          Get.find<DetailsController>().open(context, pokemonModel);
+        }
+      },
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 382),
+        child: Stack(
+          children: [
+            SizedBox(
+              height: 132,
+              child: Card(
+                elevation: 5,
+                color: pokemonModel.types.first.backgroundColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      bottom: -10,
+                      child: _pokeballOverlayImage,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Positioned(
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: _pokemonContentWidget,
-          ),
-          Positioned(top: 16, right: 16, child: _favoriteButton),
-        ],
+            Positioned(
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: _pokemonContentWidget,
+            ),
+            Positioned(top: 16, right: 16, child: _favoriteButton),
+          ],
+        ),
       ),
     );
   }

@@ -105,7 +105,7 @@ class FavoritesPokemonsListPage extends StatelessWidget {
       alignment: WrapAlignment.center,
       runAlignment: WrapAlignment.center,
       spacing: 5,
-      runSpacing: 15,
+      runSpacing: 5,
       children: controller.favorites
           .map(
             (pokemonModel) => PokemonCardWidget(

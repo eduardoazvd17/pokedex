@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:localization/localization.dart';
 import 'package:pokedex/src/core/data/exceptions/app_exception.dart';
+import 'package:pokedex/src/core/data/models/pokemon_details_dto.dart';
 import 'package:pokedex/src/core/data/repository/app_repository.dart';
 import 'package:pokedex/src/core/data/models/adapters/pokemon_model_adapter.dart';
 import 'package:pokedex/src/core/data/models/pokemon_model.dart';
@@ -19,10 +20,51 @@ class PokemonsService with AppRepository {
       final Map<String, dynamic> response = await get(url: url);
       final pokemonMap = List<Map<String, dynamic>>.from(response['results']);
       for (final Map<String, dynamic> pokemon in pokemonMap) {
-        final data = await get(url: pokemon['url']);
+        final Map<String, dynamic> data = await get(url: pokemon['url']);
         pokemonModels.add(PokemonModel.fromMap(data));
       }
       return pokemonModels;
+    } on AppException catch (_) {
+      rethrow;
+    } catch (error) {
+      throw AppException(
+        'get-all-pokemons-error'.i18n(),
+        detailedMessage: error.toString(),
+      );
+    }
+  }
+
+  Future<PokemonDetailsDTO> loadDetails(PokemonModel model) async {
+    try {
+      final dataMap = await get(url: '$_endpoint/pokemon/${model.order}');
+
+      late String gender;
+      try {
+        final genderMap = await get(url: '$_endpoint/gender/${model.order}');
+        gender = genderMap['name'].replaceFirst(
+          genderMap['name'][0],
+          genderMap['name'][0].toUpperCase(),
+        );
+      } catch (_) {
+        gender = 'Genderless';
+      }
+
+      return PokemonDetailsDTO(
+        model: model,
+        height: '${dataMap['height'] / 10}m',
+        weight: '${dataMap['weight'] / 10}kg',
+        gender: gender,
+        abilities: dataMap['abilities']
+            .map((e) {
+              final String name = e['ability']['name'];
+              return name.replaceFirst(name[0], name[0].toUpperCase());
+            })
+            .toString()
+            .replaceAll('(', '')
+            .replaceAll(')', ''),
+        weakenes: [],
+        strengths: [],
+      );
     } on AppException catch (_) {
       rethrow;
     } catch (error) {
